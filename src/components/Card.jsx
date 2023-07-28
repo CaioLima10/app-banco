@@ -22,6 +22,16 @@ useEffect(() => {
       }, []);
 
 
+      const addSpacesToCardNumber = (tel) => {
+        console.log('Received card tel:', tel);
+        return tel.replace( /\D/g , '').replace(/(\d{4})/g, '$1 ').trim();
+      };
+    
+      const addSpacesToCardExpiry = (expiry) => {
+        return expiry.replace(/(\d{2})(\d{2})/, '$1/$2').trim(); 
+      }
+
+      
 
 const handleClickBtn = (event) => {
     event.preventDefault()
@@ -40,8 +50,9 @@ const handleClickBtn = (event) => {
     setCardNumber('')
     setCardName('')
     setCardExpiry('')
-    setCardCvc('')   
-            return updatedCards;
+    setCardCvc('')
+
+    return updatedCards;
 })
 }
 
@@ -51,7 +62,7 @@ const handleClickBtn = (event) => {
       <ContainerCard>
         <ContextCard>
           <CardChipIcon />
-          <h2>{cardNumber}</h2>
+          <h2>{ cardNumber}</h2>
           <h3>{cardName}</h3>
           <span>{cardExpiry}</span>
           <p>{cardCvc}</p>
@@ -67,13 +78,13 @@ const handleClickBtn = (event) => {
             type="tel"
             name="number"
             placeholder="Digite Numero"
-            maxLength="18"
+            maxLength={16}
             value={cardNumber}
             onChange={e =>  setCardNumber(e.target.value)}
 
           />
           <input
-            type="text"
+            type="name"
             name="name"
             placeholder="Digite seu Nome"
             maxLength={18}
@@ -108,9 +119,9 @@ const handleClickBtn = (event) => {
     </ContainerForm>
     {createCards.map((item, index) => (
       <Cards key={index}>
-          <h2>{item.number}</h2>
+          <h2>{addSpacesToCardNumber(item.number)}</h2>
           <h3>{item.name}</h3>
-          <span>{item.expiry}</span>
+          <span>{addSpacesToCardExpiry(item.expiry)}</span>
           <p>{item.cvc}</p>
       </Cards>
       ))}
