@@ -1,7 +1,10 @@
+import CreditCard from "./components/Card"
+
 function App() {
 
   return (
     <>
+      <CreditCard/>
     </>
   )
 }
