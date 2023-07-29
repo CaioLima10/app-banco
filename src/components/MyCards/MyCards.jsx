@@ -6,6 +6,9 @@ import { useState } from "react";
 export default function MyCards() {
 
   const [deleteCard, setDeleteCard] = useState(JSON.parse(localStorage.getItem('cards')) || []);
+  const [createCard, setCreateCards] = useState(JSON.parse(localStorage.getItem('cards')) || []);
+
+  console.log(createCard)
 
 
     const createCards = JSON.parse(localStorage.getItem('cards')) || [];
@@ -18,22 +21,51 @@ export default function MyCards() {
         return expiry.replace(/(\d{2})(\d{2})/, '$1/$2').trim(); 
       }
 
-      const handleDeleteCard = (index) => {
-        const updateCard = [...deleteCard];
+      const handleDeleteCard = (id) => {
     
-        updateCard.splice(index, 1);
-    
-        setDeleteCard(updateCard);
+
+    const cardIndex = deleteCard.findIndex((card) => card.id === id);
         
+        if (cardIndex !== -1) {
+  
+        const updateCard = [...deleteCard];      
+        updateCard.splice(cardIndex, 1);
+        setDeleteCard(updateCard);
         localStorage.setItem('cards', JSON.stringify(updateCard));
+        }    
       };
+
+      const handleClickBlock = (id) => {
+        const updatedCards = JSON.parse(localStorage.getItem('cards')) || [];
+      
+        const updatedCardsWithBlock = updatedCards.map((card) => {
+          if (card.id === id) {
+            return {
+              ...card,
+              isCompleted: !card.isCompleted,
+            };
+          }
+          return card;
+        });
+      
+        setCreateCards(updatedCardsWithBlock);
+        localStorage.setItem('cards', JSON.stringify(updatedCardsWithBlock));
+      };
+      
+      
+  
 
   return (
   <>
       <Header/>
     <Container>
-    {createCards.map((item, index) => (
-      <CardsContainer key={index}>
+    {createCards.map((item ) => (
+      <>   
+      <CardsContainer key={item.id}
+        $completed={item.isCompleted ? 'checked-block' : 'remove-block'}
+        className={item.isCompleted ? "checked-block" : ""}
+        disabled={item.isCompleted}
+      >
         <div>
           <h2>{addSpacesToCardNumber(item.number)}</h2>
           <h3>{item.name}</h3>
@@ -41,11 +73,14 @@ export default function MyCards() {
           <p>{item.cvc}</p>
         </div>
         <div>
-          <button onClick={() => handleDeleteCard(index)} >confirmar</button>
+          <button onClick={() => handleDeleteCard(item.id)} >confirmar</button>
         </div>
       </CardsContainer>
+         <div>
+            <button className="btn-block" onClick={ () => handleClickBlock(item.id) }>bloquear</button>
+        </div>
+      </>
       ))}
-        
     </Container>
   </>
   )
