@@ -7,6 +7,9 @@ export const Cards = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute;
+  top: 70px;
+
   
 `;
 
@@ -25,9 +28,9 @@ export const ContainerCard = styled.div`
   height: 220px;
   border-radius: 16px;
   padding: 20px;
-  background: #ADA996;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #ADA996; 
+  background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); 
+  background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.10);
   display: flex;
   flex-direction: column;
@@ -75,6 +78,8 @@ export const ContainerForm = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 160px;
+  margin-bottom: 30px;
 `;
 
 export const Paper = styled.div`
