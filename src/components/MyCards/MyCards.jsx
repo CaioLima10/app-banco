@@ -1,8 +1,11 @@
 
-import { Cards } from "../Card/styles";
+import { CardsContainer, Container } from "./styles";
 import Header from "../Header/Header"
+import { useState } from "react";
 
 export default function MyCards() {
+
+  const [deleteCard, setDeleteCard] = useState(JSON.parse(localStorage.getItem('cards')) || []);
 
 
     const createCards = JSON.parse(localStorage.getItem('cards')) || [];
@@ -15,18 +18,35 @@ export default function MyCards() {
         return expiry.replace(/(\d{2})(\d{2})/, '$1/$2').trim(); 
       }
 
+      const handleDeleteCard = (index) => {
+        const updateCard = [...deleteCard];
+    
+        updateCard.splice(index, 1);
+    
+        setDeleteCard(updateCard);
+        
+        localStorage.setItem('cards', JSON.stringify(updateCard));
+      };
 
   return (
-    <div>
+  <>
       <Header/>
+    <Container>
     {createCards.map((item, index) => (
-      <Cards key={index}>
+      <CardsContainer key={index}>
+        <div>
           <h2>{addSpacesToCardNumber(item.number)}</h2>
           <h3>{item.name}</h3>
           <span>{addSpacesToCardExpiry(item.expiry)}</span>
           <p>{item.cvc}</p>
-      </Cards>
+        </div>
+        <div>
+          <button onClick={() => handleDeleteCard(index)} >confirmar</button>
+        </div>
+      </CardsContainer>
       ))}
-    </div>
+        
+    </Container>
+  </>
   )
 }
