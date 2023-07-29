@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 
 export const Container = styled.div`
@@ -30,5 +30,19 @@ export const CardsContainer = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: inline-block;
   flex-direction: column;
+
+  ${ props => props.$completed === "checked-block" &&
+      css`
+      opacity: ${props => (props.disabled ? "0.6" : "1")};
+      pointer-events: ${props => (props.disabled ? "none" : "auto")};
+      `
+    }
+
+
+    .btn-block{
+        position: fixed;
+        z-index:2;
+      }
+
 
 `;
