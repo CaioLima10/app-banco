@@ -7,8 +7,9 @@ export default function RouterApp () {
     <>  
     <BrowserRouter>
         <Routes>
-            <Route path="/" element={<CreditCard/>} />
-            <Route path="/meus-cartoes" element={<MyCards/>} />
+            <Route exact path="/" element={<CreditCard/>} />
+            <Route  path="/meus-cartoes" element={<MyCards/>} />
+            <Route  path="*" element={<CreditCard/>} />
         </Routes>
     </BrowserRouter>
     </>
