@@ -15,18 +15,11 @@ console.log(createCards)
 useEffect(() => {
     
     const cardsLocalstorage = localStorage.getItem('cards');
-       
     if (cardsLocalstorage) {
           const loadCardStorage = JSON.parse(cardsLocalstorage);
-          
-
     setCreateCards(loadCardStorage);
         }
-
       }, []);
-
-     
-      
 
 const handleClickBtn = (event) => {
     event.preventDefault()
