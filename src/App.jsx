@@ -1,12 +1,12 @@
-import CreditCard from "./components/Card"
+import RouterApp from "./components/routes"
 import { GlobalStyle } from "./styles/global"
 
 function App() {
 
   return (
     <>
-      <GlobalStyle/>
-      <CreditCard/>
+        <RouterApp/>
+        <GlobalStyle/>
     </>
   )
 }
