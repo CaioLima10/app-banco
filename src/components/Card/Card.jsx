@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Cards, ContainerCard, ContextCard, CardChipIcon, Form, ContainerForm, Paper, Visa } from './styles'
-import { Link } from 'react-router-dom';
+import Header from '../Header/Header'
 
 const CreditCard = () => {
-
 
 const [cardNumber, setCardNumber] = useState("");
 const [cardName, setCardName] = useState("");
@@ -54,6 +53,7 @@ const handleClickBtn = (event) => {
 
   return (
     <>
+      <Header/>
     <Cards>
       <ContainerCard>
         <ContextCard>
@@ -112,7 +112,6 @@ const handleClickBtn = (event) => {
         </Form>
       </Paper>
     </ContainerForm>
-    <Link to="/meus-cartoes">Meus Cartoes</Link>
     </>
 
   );
