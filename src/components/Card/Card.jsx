@@ -24,6 +24,7 @@ useEffect(() => {
 const handleClickBtn = (event) => {
     event.preventDefault()
     const newCard = {
+        id: Date.now(),
         number: cardNumber,
         name: cardName,
         expiry: cardExpiry,
