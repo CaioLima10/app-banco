@@ -45,8 +45,7 @@ export default function MyCards() {
       const updateCard = [...deleteCard];
       updateCard.splice(cardIndex , 1);
       
-      setDeleteCard(updateCard);
-      
+      setDeleteCard(updateCard)
       setCreateCards(updateCard)
 
       localStorage.setItem('cards' , JSON.stringify(updateCard))
