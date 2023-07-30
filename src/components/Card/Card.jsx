@@ -4,14 +4,17 @@ import Header from '../Header/Header'
 
 const CreditCard = () => {
 
+  const storedColor = JSON.parse(localStorage.getItem('backgroundCard'));
+
 const [cardNumber, setCardNumber] = useState("");
 const [cardName, setCardName] = useState("");
 const [cardExpiry, setCardExpiry] = useState("");
 const [cardCvc, setCardCvc] = useState("");
 const [ createCards , setCreateCards ] = useState([]) 
+const [backgroundCard, setBackgroundCard] = useState(storedColor || "white");
+
 
 console.log(createCards)
-
 useEffect(() => {
     
     const cardsLocalstorage = localStorage.getItem('cards');
@@ -28,37 +31,37 @@ const handleClickBtn = (event) => {
         number: cardNumber,
         name: cardName,
         expiry: cardExpiry,
-        cvc: cardCvc
+        cvc: cardCvc,
+        color: backgroundCard
     }
 
     setCreateCards((prevCards) => {
     const updatedCards = [...prevCards, newCard];      
     localStorage.setItem('cards', JSON.stringify(updatedCards));
 
-                
     setCardNumber('')
     setCardName('')
     setCardExpiry('')
     setCardCvc('')
 
     return updatedCards;
-})
+  })
 }
 
   return (
     <>
       <Header/>
-    <Cards>
-      <ContainerCard>
+    <Cards  >
+      <ContainerCard style={{ backgroundColor: backgroundCard}}>
         <ContextCard>
           <CardChipIcon />
-          <h2>{ cardNumber}</h2>
-          <h3>{cardName}</h3>
-          <span>{cardExpiry}</span>
-          <p>{cardCvc}</p>
+          <h2 style={{ color: backgroundCard === "black" ? "white" : "black" }}>{ cardNumber}</h2>
+          <h3 style={{ color: backgroundCard === "black" ? "white" : "black" }}>{cardName}</h3>
+          <span style={{ color: backgroundCard === "black" ? "white" : "black" }}>{cardExpiry}</span>
+          <p style={{ color: backgroundCard === "black" ? "white" : "black" }}>{cardCvc}</p>
         </ContextCard>
           <Visa/>
-      </ContainerCard>
+      </ContainerCard>  
     </Cards>
 
     <ContainerForm>
@@ -82,24 +85,37 @@ const handleClickBtn = (event) => {
             onChange={e =>  setCardName(e.target.value)}
 
           />
-          <input
-            type="text"
-            name="expiry"
-            placeholder="MM/YY"
-            maxLength={4}
-            value={cardExpiry}
-            onChange={e =>  setCardExpiry(e.target.value)}
+          <div className='container-expity-cvc'>
+            <input
+              type="text"
+              name="expiry"
+              placeholder="MM/YY"
+              className='expity'
+              maxLength={4}
+              value={cardExpiry}
+              onChange={e =>  setCardExpiry(e.target.value)}
 
-          />
-          <input
-            type="tel"
-            name="cvc"
-            placeholder="CVC"
-            maxLength={3}
-            value={cardCvc}
-            onChange={e =>  setCardCvc(e.target.value)}
+            />
+            <input
+              type="tel"
+              name="cvc"
+              className='cvc'
+              placeholder="CVC"
+              maxLength={3}
+              value={cardCvc}
+              onChange={e =>  setCardCvc(e.target.value)}
+            />
+          </div>
 
-          />
+          <label> Escolha a cor do seu Cartão</label>
+            <select value={backgroundCard}  onChange={e => setBackgroundCard(e.target.value)}>
+              <option value="white">branco</option>
+              <option value="black">preto</option>
+              <option value="red">Vermelho</option>
+              <option value="pink">Rosa</option>
+              <option value="blue">Azul</option>
+            </select>
+
           <button type="submit" onClick={handleClickBtn}>
             Confirmar
           </button>
