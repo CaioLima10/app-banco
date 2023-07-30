@@ -1,6 +1,8 @@
-import { CardChipIcon,CardsContainer, Container, CardList , Visa } from "./styles";
+import { CardChipIcon,CardsContainer, Container, CardList , Visa, DescribeContainer, ButtonDelete, Blocked, Confirmed, Delete } from "./styles";
 import Header from "../Header/Header";
 import React, { useState, useEffect } from "react";
+import Swal from 'sweetalert2'
+
 
 export default function MyCards() {
   const storedCards = JSON.parse(localStorage.getItem('cards')) || [];
@@ -43,20 +45,42 @@ export default function MyCards() {
     setCreateCards(updatedCardsWithBlock);
   };
 
+
+
+  
   const handleDeleteCard = (id) => {
     const cardIndex = deleteCard.findIndex((card) => card.id === id);
-
-    if (cardIndex !== -1) {
-      const updateCard = [...deleteCard];
-      updateCard.splice(cardIndex , 1);
-      
-      setDeleteCard(updateCard)
-      setCreateCards(updateCard)
-
-      localStorage.setItem('cards' , JSON.stringify(updateCard))
-    }
+  
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        );
+  
+        if (cardIndex !== -1) {
+          const updateCard = [...deleteCard];
+          updateCard.splice(cardIndex, 1);
+  
+          setDeleteCard(updateCard);
+          setCreateCards(updateCard);
+  
+          localStorage.setItem('cards', JSON.stringify(updateCard));
+        }
+      } 
+    });
   };
-
+  
 
   return (
     <>
@@ -68,20 +92,30 @@ export default function MyCards() {
               <CardsContainer
                 onChange={e => setBackgroundCard(e.target.value)}
                 style={{ backgroundColor: item.color }}
-                $completed={item.isCompleted ? "checked-block" : "remove-block"}
-                className={item.isCompleted ? "checked-block" : ""}
-                disabled={item.isCompleted}
               >
-                <div>
+                <DescribeContainer 
+                    $completed={item.isCompleted ? "checked-block" : "remove-block"}
+                    className={item.isCompleted ? "checked-block" : ""}
+                    disabled={item.isCompleted}
+                >
                   <CardChipIcon />
                   <h2 style={{ color: backgroundCard }}>{addSpacesToCardNumber(item.number)}</h2>
                   <h3 style={{ color: backgroundCard }}>{item.name}</h3>
                   <span style={{ color: backgroundCard }}>{addSpacesToCardExpiry(item.expiry)}</span>
                   <p style={{ color: backgroundCard }}>{item.cvc}</p>
                   <Visa />
-                </div>
-                  <button onClick={() => handleDeleteCard(item.id)}>confirmar</button>
-                  <button className="btn-block" onClick={() => handleClickBlock(item.id)}>bloquear</button>
+                </DescribeContainer>
+                  <ButtonDelete 
+                      $completed={item.isCompleted ? "checked-block" : "remove-block"}
+                      className={item.isCompleted ? "checked-block" : ""}
+                      disabled={item.isCompleted}
+                      onClick={() => handleDeleteCard(item.id)}>
+                      <Delete/>
+                  </ButtonDelete>
+                <button className="btnBlock"
+                  onClick={() => handleClickBlock(item.id)}
+                    >{item.isCompleted ? <Blocked/> : <Confirmed/>}
+                </button>
               </CardsContainer>
             </React.Fragment>
           ))}
