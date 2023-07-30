@@ -19,10 +19,12 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 25px;
+
 `;
 
 export const ContainerCard = styled.div`
+  position: relative; 
   width: 100%;
   max-width: 350px;
   height: 220px;
@@ -70,6 +72,7 @@ color: linear-gradient(to bottom, #434343, #000000);
     color: -webkit-linear-gradient(to right, #DECBA4, #3E5151); 
     color: linear-gradient(to right, #DECBA4, #3E5151); 
   }
+
 `;
 
 export const Visa = styled(BiLogoVisa)`
@@ -164,4 +167,3 @@ export const Form = styled.form`
     cursor: pointer;
   }
 `;
-
