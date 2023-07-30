@@ -43,20 +43,32 @@ color: linear-gradient(to bottom, #434343, #000000);
   h2 {
     font-size: 24px;
     margin-bottom: 8px;
+    color: #3E5151; 
+    color: -webkit-linear-gradient(to right, #DECBA4, #3E5151); 
+    color: linear-gradient(to right, #DECBA4, #3E5151); 
   }
 
   h3 {
     font-size: 18px;
     margin-bottom: 8px;
+    color: #3E5151; 
+    color: -webkit-linear-gradient(to right, #DECBA4, #3E5151); 
+    color: linear-gradient(to right, #DECBA4, #3E5151); 
   }
 
   span {
     font-size: 14px;
+    color: #3E5151; 
+    color: -webkit-linear-gradient(to right, #DECBA4, #3E5151); 
+    color: linear-gradient(to right, #DECBA4, #3E5151); 
   }
 
   p {
     font-size: 16px;
     font-weight: bold;
+    color: #3E5151; 
+    color: -webkit-linear-gradient(to right, #DECBA4, #3E5151); 
+    color: linear-gradient(to right, #DECBA4, #3E5151); 
   }
 `;
 
