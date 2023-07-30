@@ -16,11 +16,11 @@ export const Container = styled.div`
 `
 
 export const Close = styled(FaTimes)`
-    position: fixed ;
+    position: fixed;
     color: #ededed;
-    width: 30px;
+    width: 20px;
     height: 30px;
-    margin-top: 18px;
+    margin-top: 14px;
     margin-left: 32px;
     cursor: pointer;
 
