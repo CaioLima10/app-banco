@@ -28,10 +28,7 @@ export const ContainerCard = styled.div`
   height: 220px;
   border-radius: 16px;
   padding: 20px;
-  background: #ADA996; 
-  background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); 
-  background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.60);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -39,7 +36,9 @@ export const ContainerCard = styled.div`
 `;
 
 export const ContextCard = styled.div`
-  color: #000;
+color: #000000;
+color: -webkit-linear-gradient(to bottom, #434343, #000000);
+color: linear-gradient(to bottom, #434343, #000000);
 
   h2 {
     font-size: 24px;
@@ -67,7 +66,9 @@ export const Visa = styled(BiLogoVisa)`
   width: 100%;
   right: 0;
   top: 150px;
-  color: #000;
+  color: #bdc3c7;  
+  color: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7); 
+  color: linear-gradient(to right, #2c3e50, #bdc3c7); 
 `;
 
 export const CardChipIcon = styled(FcSimCardChip)`
@@ -79,7 +80,7 @@ export const ContainerForm = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 160px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 `;
 
 export const Paper = styled.div`
@@ -94,17 +95,56 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 60px;
+
+
 
   input {
-    margin-bottom: 10px;
-    width: 320px;
+    width: 100%;
+    margin-top: 10px;
+
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
   }
+  .expity,
+  .cvc {
+    display: inline-flex;
+  }
+  .expity{
+    width: 60%;
+  }
+  .cvc{
+    width: 40%;
+  }
+
+  .container-expity-cvc{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  label{
+    width: 100%;
+    font-size: 14px;
+    opacity: 0.8;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  select{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    opacity: 0.6;
+
+  }
 
   button {
-    padding: 8px 16px;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
     background-color: #007bff;
     color: #fff;
     border: none;
