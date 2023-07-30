@@ -4,7 +4,7 @@ import Header from '../Header/Header'
 
 const CreditCard = () => {
 
-  const storedColor = JSON.parse(localStorage.getItem('backgroundCard'));
+const storedColor = JSON.parse(localStorage.getItem('backgroundCard'));
 
 const [cardNumber, setCardNumber] = useState("");
 const [cardName, setCardName] = useState("");
@@ -13,6 +13,13 @@ const [cardCvc, setCardCvc] = useState("");
 const [ createCards , setCreateCards ] = useState([]) 
 const [backgroundCard, setBackgroundCard] = useState(storedColor || "white");
 
+const addSpacesToCardNumber = (number) => {
+  return number.replace(/\s/g, '').replace(/(\d{4})/g, '$1 ').trim();
+};
+
+const addSpacesToCardExpiry = (expiry) => {
+  return expiry.replace(/(\d{2})(\d{2})/, '$1/$2').trim();
+};
 
 console.log(createCards)
 useEffect(() => {
@@ -55,10 +62,10 @@ const handleClickBtn = (event) => {
       <ContainerCard style={{ backgroundColor: backgroundCard}}>
         <ContextCard>
           <CardChipIcon />
-          <h2 style={{ color: backgroundCard === "black" ? "white" : "black" }}>{ cardNumber}</h2>
-          <h3 style={{ color: backgroundCard === "black" ? "white" : "black" }}>{cardName}</h3>
-          <span style={{ color: backgroundCard === "black" ? "white" : "black" }}>{cardExpiry}</span>
-          <p style={{ color: backgroundCard === "black" ? "white" : "black" }}>{cardCvc}</p>
+          <h2 >{addSpacesToCardNumber(cardNumber)}</h2>
+          <h3 >{cardName}</h3>
+          <span>{addSpacesToCardExpiry(cardExpiry)}</span>
+          <p >{cardCvc}</p>
         </ContextCard>
           <Visa/>
       </ContainerCard>  
