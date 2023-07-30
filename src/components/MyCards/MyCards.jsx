@@ -1,16 +1,22 @@
-import { CardsContainer, Container } from "./styles";
+import { CardChipIcon,CardsContainer, Container, CardList , Visa } from "./styles";
 import Header from "../Header/Header";
 import React, { useState, useEffect } from "react";
 
 export default function MyCards() {
   const storedCards = JSON.parse(localStorage.getItem('cards')) || [];
   const filteredCards = storedCards.filter((card) => card !== null);
+  const storedColor = JSON.parse(localStorage.getItem('backgroundCard'));
+
 
   const [deleteCard, setDeleteCard] = useState(filteredCards);
   const [createCards, setCreateCards] = useState(filteredCards);
+  const [backgroundCard, setBackgroundCard] = useState(storedColor || "#3E5151");
+
+
 
   useEffect(() => {
     localStorage.setItem('cards', JSON.stringify(createCards));
+
   }, [createCards]);
 
   const addSpacesToCardNumber = (number) => {
@@ -20,7 +26,6 @@ export default function MyCards() {
   const addSpacesToCardExpiry = (expiry) => {
     return expiry.replace(/(\d{2})(\d{2})/, '$1/$2').trim();
   };
-
 
   const handleClickBlock = (id) => {
     const updatedCards = [...createCards];
@@ -52,32 +57,35 @@ export default function MyCards() {
     }
   };
 
+
   return (
     <>
       <Header />
       <Container>
-        {createCards.map((item , index) => (
-          <React.Fragment key={index}>
-            <CardsContainer
-              $completed={item.isCompleted ? 'checked-block' : 'remove-block'}
-              className={item.isCompleted ? "checked-block" : ""}
-              disabled={item.isCompleted}
-            >
-              <div>
-                <h2>{addSpacesToCardNumber(item.number)}</h2>
-                <h3>{item.name}</h3>
-                <span>{addSpacesToCardExpiry(item.expiry)}</span>
-                <p>{item.cvc}</p>
-              </div>
-              <div>
-                <button onClick={() => handleDeleteCard(item.id)}>confirmar</button>
-              </div>
-            </CardsContainer>
-            <div>
-              <button className="btn-block" onClick={() => handleClickBlock(item.id)}>bloquear</button>
-            </div>
-          </React.Fragment>
-        ))}
+        <CardList>
+          {createCards.map((item, index) => (
+            <React.Fragment key={index}>
+              <CardsContainer
+                onChange={e => setBackgroundCard(e.target.value)}
+                style={{ backgroundColor: item.color }}
+                $completed={item.isCompleted ? "checked-block" : "remove-block"}
+                className={item.isCompleted ? "checked-block" : ""}
+                disabled={item.isCompleted}
+              >
+                <div>
+                  <CardChipIcon />
+                  <h2 style={{ color: backgroundCard }}>{addSpacesToCardNumber(item.number)}</h2>
+                  <h3 style={{ color: backgroundCard }}>{item.name}</h3>
+                  <span style={{ color: backgroundCard }}>{addSpacesToCardExpiry(item.expiry)}</span>
+                  <p style={{ color: backgroundCard }}>{item.cvc}</p>
+                  <Visa />
+                </div>
+                  <button onClick={() => handleDeleteCard(item.id)}>confirmar</button>
+                  <button className="btn-block" onClick={() => handleClickBlock(item.id)}>bloquear</button>
+              </CardsContainer>
+            </React.Fragment>
+          ))}
+        </CardList>
       </Container>
     </>
   );
