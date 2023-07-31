@@ -23,10 +23,10 @@ export default function MyCards() {
     return number.replace(/\s/g, '').replace(/(\d{4})/g, '$1 ').trim();
   };
 
-  const addSpacesToCardExpiry = (expiry) => {
-    return expiry.replace(/(\d{2})(\d{2})/, '$1/$2').trim();
-  };
+  function addSpacesToCardExpiry(expiry) {
+    return typeof expiry === 'string' ? expiry.replace(/(\d{2})(\d{2})/, '$1/$2').trim() : '';
 
+  }
   const addToCardLetter = (name) => {
     return name.replace(/[^a-zA-Z]+/g, "");
   };
