@@ -15,10 +15,8 @@ export default function MyCards() {
   const [backgroundCard, setBackgroundCard] = useState(storedColor || "#3E5151");
 
 
-
   useEffect(() => {
     localStorage.setItem('cards', JSON.stringify(createCards));
-
   }, [createCards]);
 
   const addSpacesToCardNumber = (number) => {
@@ -27,6 +25,10 @@ export default function MyCards() {
 
   const addSpacesToCardExpiry = (expiry) => {
     return expiry.replace(/(\d{2})(\d{2})/, '$1/$2').trim();
+  };
+
+  const addToCardLetter = (name) => {
+    return name.replace(/[^a-zA-Z]+/g, "");
   };
 
   const handleClickBlock = (id) => {
@@ -45,26 +47,23 @@ export default function MyCards() {
     setCreateCards(updatedCardsWithBlock);
   };
 
-
-
-  
   const handleDeleteCard = (id) => {
     const cardIndex = deleteCard.findIndex((card) => card.id === id);
   
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
+      title: 'Tem certeza?',
+      text: "Você não será capaz de reverter isso!",
+      icon: 'aviso',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'Cancel',
+      confirmButtonText: 'sim, apague!',
+      cancelButtonText: 'cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
+          'Excluído!',
+          'Seu arquivo foi excluído.',
           'success'
         );
   
@@ -100,7 +99,7 @@ export default function MyCards() {
                 >
                   <CardChipIcon />
                   <h2 style={{ color: backgroundCard }}>{addSpacesToCardNumber(item.number)}</h2>
-                  <h3 style={{ color: backgroundCard }}>{item.name}</h3>
+                  <h3 style={{ color: backgroundCard }}>{addToCardLetter(item.name)}</h3>
                   <span style={{ color: backgroundCard }}>{addSpacesToCardExpiry(item.expiry)}</span>
                   <p style={{ color: backgroundCard }}>{item.cvc}</p>
                   <Visa />
