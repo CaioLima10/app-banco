@@ -111,26 +111,25 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: center;
   margin-top: 60px;
-
+  width: 400px;
 
 
   input {
     width: 100%;
     margin-top: 10px;
-
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
   }
-  .expity,
-  .cvc {
-    display: inline-flex;
-  }
-  .expity{
-    width: 60%;
-  }
-  .cvc{
-    width: 40%;
+
+  small{
+    width: 100%;
+    padding: 6px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: #FF3B3F99;
+
   }
 
   .container-expity-cvc{
