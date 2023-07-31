@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Cards, ContainerCard, ContextCard, CardChipIcon, Form, ContainerForm, Paper, Visa } from './styles'
 import Header from '../Header/Header'
+import Swal from 'sweetalert2';
 
 const CreditCard = () => {
 
@@ -13,12 +14,17 @@ const [cardCvc, setCardCvc] = useState("");
 const [ createCards , setCreateCards ] = useState([]) 
 const [backgroundCard, setBackgroundCard] = useState(storedColor || "white");
 
+
 const addSpacesToCardNumber = (number) => {
   return number.replace(/\s/g, '').replace(/(\d{4})/g, '$1 ').trim();
 };
 
 const addSpacesToCardExpiry = (expiry) => {
   return expiry.replace(/(\d{2})(\d{2})/, '$1/$2').trim();
+};
+
+const addToCardLetter = (name) => {
+  return name.replace(/[^a-zA-Z]+/g, "  ").trim();
 };
 
 console.log(createCards)
@@ -32,7 +38,8 @@ useEffect(() => {
       }, []);
 
 const handleClickBtn = (event) => {
-    event.preventDefault()
+  event.preventDefault()
+
     const newCard = {
         id: Date.now(),
         number: cardNumber,
@@ -42,9 +49,33 @@ const handleClickBtn = (event) => {
         color: backgroundCard
     }
 
+
     setCreateCards((prevCards) => {
     const updatedCards = [...prevCards, newCard];      
     localStorage.setItem('cards', JSON.stringify(updatedCards));
+
+    if (!cardNumber || !cardName || !cardExpiry || !cardCvc) {
+      Swal.fire('preencha todos os campos.')
+
+    }else{
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Cartão criado com sucesso'
+      })
+    }
+  
 
     setCardNumber('')
     setCardName('')
@@ -63,7 +94,7 @@ const handleClickBtn = (event) => {
         <ContextCard>
           <CardChipIcon />
           <h2 >{addSpacesToCardNumber(cardNumber)}</h2>
-          <h3 >{cardName}</h3>
+          <h3 >{addToCardLetter(cardName)}</h3>
           <span>{addSpacesToCardExpiry(cardExpiry)}</span>
           <p >{cardCvc}</p>
         </ContextCard>
