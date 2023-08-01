@@ -1,4 +1,4 @@
-import { CardChipIcon,CardsContainer, Container, CardList , Visa, DescribeContainer, ButtonDelete, Blocked, Confirmed, Delete } from "./styles";
+import { CardChipIcon,CardsContainer, Container, CardList , Visa, DescribeContainer, ButtonDelete, Blocked, Confirmed, Delete, Pix, ContainerPix } from "./styles";
 import Header from "../Header/Header";
 import React, { useState, useEffect } from "react";
 import Swal from 'sweetalert2'
@@ -33,7 +33,6 @@ export default function MyCards() {
 
   const handleClickBlock = (id) => {
     const updatedCards = [...createCards];
-
     const updatedCardsWithBlock = updatedCards.map((card) => {
       if (card.id === id) {
         return {
@@ -103,18 +102,32 @@ export default function MyCards() {
                   <span style={{ color: backgroundCard }}>{addSpacesToCardExpiry(item.expiry)}</span>
                   <p style={{ color: backgroundCard }}>{item.cvc}</p>
                   <Visa />
+
                 </DescribeContainer>
+
+                <ContainerPix
+                  $completed={item.isCompleted ? "checked-block" : "remove-block"}
+                  className={item.isCompleted ? "checked-block" : ""}
+                  disabled={item.isCompleted}
+                >
+                  <Pix/>
+                  <p>Pix</p>
+                </ContainerPix>
+
                   <ButtonDelete 
                       $completed={item.isCompleted ? "checked-block" : "remove-block"}
                       className={item.isCompleted ? "checked-block" : ""}
                       disabled={item.isCompleted}
                       onClick={() => handleDeleteCard(item.id)}>
                       <Delete/>
+                      <p>Deletar</p>
                   </ButtonDelete>
+
                 <button className="btnBlock"
                   onClick={() => handleClickBlock(item.id)}
                     >{item.isCompleted ? <Blocked/> : <Confirmed/>}
                 </button>
+
               </CardsContainer>
             </React.Fragment>
           ))}
