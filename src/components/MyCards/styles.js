@@ -3,6 +3,7 @@ import { BiLogoVisa } from "react-icons/bi";
 import { FcSimCardChip } from "react-icons/fc";
 import { GiConfirmed } from "react-icons/gi";
 import { ImBlocked } from "react-icons/im";
+import { MdPix } from "react-icons/md";
 import styled, { css } from "styled-components";
 
 export const Container = styled.div`
@@ -36,7 +37,6 @@ export const CardsContainer = styled.div`
     border-radius: 50px;
     background: none;
   }
-
 `;
 
 export const Blocked = styled(ImBlocked)`
@@ -72,13 +72,16 @@ ${props =>
       opacity: ${props => (props.disabled ? "0.6" : "1")};
       pointer-events: ${props => (props.disabled ? "none" : "auto")};
     `}
-
 `
 
 export const ButtonDelete = styled.button`
   display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
   background-color: none;
   border: none;
+  flex-direction: column;
 
 ${props =>
     props.$completed === "checked-block" &&
@@ -86,6 +89,11 @@ ${props =>
       opacity: ${props => (props.disabled ? "0.4" : "1")};
       pointer-events: ${props => (props.disabled ? "none" : "auto")};
     `}
+
+  p{
+
+  }
+
 `
 
 export const CardChipIcon = styled(FcSimCardChip)`
@@ -102,3 +110,31 @@ export const Visa = styled(BiLogoVisa)`
   color: linear-gradient(to right, #2c3e50, #bdc3c7);
 `;
 
+export const ContainerPix = styled.button`
+  position: absolute;
+  background: none;
+  border: none;
+  display: inline-flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+
+${props =>
+  props.$completed === "checked-block" &&
+  css`
+    opacity: ${props => (props.disabled ? "0.4" : "1")};
+    pointer-events: ${props => (props.disabled ? "none" : "auto")};
+  `}
+`
+
+export const Pix = styled(MdPix)`
+  font-size: 22px;
+  display: flex;
+  cursor: pointer;
+
+
+    &:hover{
+      color: green;
+    }
+`
