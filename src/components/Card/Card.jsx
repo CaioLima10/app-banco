@@ -11,7 +11,7 @@ const [cardNumber, setCardNumber] = useState("");
 const [cardName, setCardName] = useState("");
 const [cardExpiry, setCardExpiry] = useState("");
 const [cardCvc, setCardCvc] = useState("");
-const [ createCards , setCreateCards ] = useState([]) 
+const [createCards , setCreateCards ] = useState([]) 
 const [backgroundCard, setBackgroundCard] = useState(storedColor || "white");
 
 // validações
@@ -22,6 +22,7 @@ const [isCardExpiryEmpty, setIsCardExpiryEmpty] = useState(false);
 const [isCardCvcEmpty, setIsCardCvcEmpty] = useState(false);
 const cardNumberRef = useRef(null);
 const cardNameRef = useRef(null)
+const cardNameLetterRef = useRef(null)
 const cardExpiryRef = useRef(null)
 const cardCvcRef = useRef(null)
 
@@ -45,7 +46,7 @@ function handleNumberKeyPress(event){
 
 function handleCardNumberBlur() {
   const cardNumberValue = cardNumberRef.current.value;
-  setIsCardNumberEmpty(!isValidCardNumber(cardNumberValue));6
+  setIsCardNumberEmpty(!isValidCardNumber(cardNumberValue))
 }
 function handleCardNameBlur() {
   const cardNameValue = cardNameRef.current.value;
@@ -60,6 +61,10 @@ function handleCardCvcBlur() {
   setIsCardCvcEmpty(!isValidCardCvc(cardCvcValue));
 }
 
+function handdleCardLetterNameBlur(){
+  const cardNameLetter = cardNameLetterRef.current.value
+  setIsValidLetterEmprt(!cardNameLetter)
+}
 
 const addSpacesToCardNumber = (number) => {
   return number.replace(/\s/g, '').replace(/(\d{4})/g, '$1 ').trim();
@@ -118,7 +123,7 @@ useEffect(() => {
         }else{
           setIsValidLetterEmprt(false)
         }
-      
+
         if (!isCardExpiryValid) {
           setIsCardExpiryEmpty(true);
         } else {
@@ -215,8 +220,8 @@ useEffect(() => {
             name="name"
             placeholder="Digite seu Nome"
             maxLength={18}
-            onKeyPress={handleNameKeyPress}
-            ref={cardNameRef}
+            onKeyPress={handleNameKeyPress ? handleNameKeyPress : handdleCardLetterNameBlur}
+            ref={cardNameRef ? cardNameRef : cardNameLetterRef}
             onBlur={handleCardNameBlur}
             value={cardName}
             onChange={e =>  setCardName(e.target.value)}
