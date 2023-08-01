@@ -4,9 +4,7 @@ import {FaBars} from "react-icons/fa"
 export const Container = styled.header`
     height: 60px;
     display: flex;
-    background: #000000;  
-    background: -webkit-linear-gradient(to right, #e74c3c, #000000); 
-    background: linear-gradient(to right, #e74c3c, #000000); 
+    background-color: #0375B4;
 
 `
 
