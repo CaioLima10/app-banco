@@ -3,14 +3,21 @@ import { FcSimCardChip } from 'react-icons/fc';
 import { BiLogoVisa } from 'react-icons/bi';
 
 export const Cards = styled.div`
-  width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  position: absolute;
-  top: 70px;
+  text-align: center;
+  justify-content: flex-start;
+  margin: auto;
+  width: 350px;
+  margin-top: 15px;
+  margin-left: 70px;
 
-  
+  img{
+    width: 80px;
+    position: absolute;
+    left: 15px;
+    margin: auto;
+  }
 `;
 
 export const Container = styled.div`
@@ -21,66 +28,94 @@ export const Container = styled.div`
   align-items: center;
   padding: 25px;
 
+
 `;
 
 export const ContainerCard = styled.div`
   position: relative; 
   width: 100%;
-  max-width: 350px;
-  height: 220px;
-  border-radius: 16px;
+  max-width: 320px;
+  height: 200px;
+  border-radius: 8px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.60);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 20px;
+
+
 `;
+
+export const ContainerCardSelect = styled.div`
+
+
+@media (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+  }
+
+.custom-title{
+  width: 80%;
+  margin-left: 60px;
+  margin-top: 20px;
+}
+
+label{
+    text-align: center;
+    margin: auto;
+    margin-left: 35px;
+    font-size: 14px;
+    opacity: 0.8;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  select{
+    display: flex;
+    width: 76%;
+    margin-left: 70px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+    background-color: #D9D9D9;
+  }
+
+  option{
+    display: flex;
+    height: 80px;
+
+  }
+`
 
 export const ContextCard = styled.div`
 color: #000000;
 color: -webkit-linear-gradient(to bottom, #434343, #000000);
 color: linear-gradient(to bottom, #434343, #000000);
 
-  h2 {
-    font-size: 24px;
-    margin-bottom: 8px;
-    color: #3E5151; 
-    color: -webkit-linear-gradient(to right, #DECBA4, #3E5151); 
-    color: linear-gradient(to right, #DECBA4, #3E5151); 
-  }
-
   h3 {
-    font-size: 18px;
-    margin-bottom: 8px;
-    color: #3E5151; 
-    color: -webkit-linear-gradient(to right, #DECBA4, #3E5151); 
-    color: linear-gradient(to right, #DECBA4, #3E5151); 
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: flex-start;
+    margin: auto;
+    margin-top: 60px;
+    font-size: 20px;
+    color: rgb(157,156,156);
+    color: linear-gradient(0deg, rgba(157,156,156,1) 0%, rgba(237,237,237,1) 52%, rgba(157,156,156,1) 100%);
+    font-family: Poppins, sans-serif;
+    
   }
-
-  span {
-    font-size: 14px;
-    color: #3E5151; 
-    color: -webkit-linear-gradient(to right, #DECBA4, #3E5151); 
-    color: linear-gradient(to right, #DECBA4, #3E5151); 
-  }
-
-  p {
-    font-size: 16px;
-    font-weight: bold;
-    color: #3E5151; 
-    color: -webkit-linear-gradient(to right, #DECBA4, #3E5151); 
-    color: linear-gradient(to right, #DECBA4, #3E5151); 
-  }
-
 `;
 
 export const Visa = styled(BiLogoVisa)`
-  font-size: 70px;
   position: absolute;
-  width: 100%;
-  right: 0;
-  top: 150px;
+  font-size: 70px;
+  display: flex;
+  right: 10px;
+  bottom: 0px;
   color: #bdc3c7;  
   color: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7); 
   color: linear-gradient(to right, #2c3e50, #bdc3c7); 
@@ -92,38 +127,72 @@ export const CardChipIcon = styled(FcSimCardChip)`
 
 export const ContainerForm = styled.div`
   display: flex;
-  justify-content: center;
+  text-align: center;
   align-items: center;
-  margin-top: 160px;
-  margin-bottom: 10px;
-`;
+  justify-content: center;
+  margin: auto;
+
+
+  `;
 
 export const Paper = styled.div`
+    display: flex;
+    margin-top: 40px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    height: 450px;
+    background-color: #ECECEC;
+
+    .custom{
+    color: #0A9AE9;
+  }
 `;
 
 export const Form = styled.form`
   display: flex;
-  flex-direction: column;
+  text-align: center;
   align-items: center;
-  margin-top: 60px;
-  width: 400px;
+  justify-content: center;
+  margin: auto;
+  flex-direction: column;
+  width: 700px;
 
+
+  .label-name{
+    display: flex;
+    width: 80%;
+    font-size: 14px;
+    margin-bottom:7px;
+
+  }
+
+  .label{
+    font-size: 14px;
+    display: flex;
+    margin-bottom:3px;
+    margin-top:20px;
+
+  }
+  
 
   input {
-    width: 100%;
-    margin-top: 10px;
+    display: flex;
+    margin: auto;
+    background-color: #D9D9D9;
+    width: 80%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    outline: none;
+  }
+
+  input:focus{
+    border: 2px solid #007bff;
   }
 
   small{
-    width: 100%;
+    width: 80%;
     padding: 6px;
     text-align: center;
     align-items: center;
@@ -139,24 +208,8 @@ export const Form = styled.form`
     align-items: center;
   }
 
-  label{
-    width: 100%;
-    font-size: 14px;
-    opacity: 0.8;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-  select{
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    opacity: 0.6;
-
-  }
-
   button {
-    width: 100%;
+    width: 80%;
     margin-top: 20px;
     padding: 12px;
     background-color: #007bff;
@@ -165,4 +218,14 @@ export const Form = styled.form`
     border-radius: 4px;
     cursor: pointer;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+
 `;
+
+
+
