@@ -1,284 +1,270 @@
-import { useEffect, useRef, useState } from 'react';
-import { Cards, ContainerCard, ContextCard, CardChipIcon, Form, ContainerForm, Paper, Visa } from './styles'
-import Header from '../Header/Header'
-import Swal from 'sweetalert2';
+    import { useEffect, useRef, useState } from 'react';
+    import { Cards, ContainerCard, ContextCard, Form, ContainerForm, Paper, Visa, ContainerCardSelect } from './styles';
+    import Header from '../Header/Header';
+    import ModalInformation from './Information';
 
-const CreditCard = () => {
+    import { AiFillEye } from "react-icons/ai";
+    import { GrFormViewHide } from "react-icons/gr";
+    import { Check, Container, Times } from "./ValidadePassword/style";
+    import Logo from "../../assets/LOGO-GOLD.png"
+    import { useNavigate } from 'react-router-dom';
 
-const storedColor = JSON.parse(localStorage.getItem('backgroundCard'));
+    const CreditCard = () => {
+      const storedColor = JSON.parse(localStorage.getItem('backgroundCard'));
 
-const [cardNumber, setCardNumber] = useState("");
-const [cardName, setCardName] = useState("");
-const [cardExpiry, setCardExpiry] = useState("");
-const [cardCvc, setCardCvc] = useState("");
-const [createCards , setCreateCards ] = useState([]) 
-const [backgroundCard, setBackgroundCard] = useState(storedColor || "white");
+      const [cardName, setCardName] = useState("");
+      const [createCards , setCreateCards] = useState([]); 
+      const [backgroundCard, setBackgroundCard] = useState(storedColor || "white");
 
-// validações
-const [isCardNumberEmpty, setIsCardNumberEmpty] = useState(false);
-const [isCardNameEmpty, setIsCardNameEmpty] = useState(false);
-const [isValidLetterEmprt , setIsValidLetterEmprt ] = useState(false)
-const [isCardExpiryEmpty, setIsCardExpiryEmpty] = useState(false);
-const [isCardCvcEmpty, setIsCardCvcEmpty] = useState(false);
-const cardNumberRef = useRef(null);
-const cardNameRef = useRef(null)
-const cardNameLetterRef = useRef(null)
-const cardExpiryRef = useRef(null)
-const cardCvcRef = useRef(null)
+      const [cardCvc, setCardCvc] = useState("");
+      const [randomNumber, setRandomNumber] = useState("");
 
 
+      const [isCardNameEmpty, setIsCardNameEmpty] = useState(false);
+      const [isValidLetterEmpty, setIsValidLetterEmprt] = useState(false);
+      const [ isCardPasswordEmpty , setIsCardPasswordEmpty ] = useState(false)
 
-function handleNameKeyPress(event){
-  const charCode = event.charCode;
+      const [show, setShow] = useState(false);
+      const [isCapitalValidAz, setCapitalValidAz] = useState(false);
+      const [isCapitalValidSpecial, setCapitalValidSpecial] = useState(false);
+      const [isCapitalValidChar, setCapitalValidChar] = useState(false);
+      const [isCapitalValidMore, setCapitalValidMore] = useState(false);
+      const [isPasswordValid, setIsPasswordValid] = useState(false);
+      const [cardPassword, setCardPassword] = useState("");
 
-  if(charCode >= 48 && charCode <= 57){
-    event.preventDefault()
-  }
-}
+      const navigate = useNavigate()
 
-function handleNumberKeyPress(event){
-  const charCode = event.charCode
+      const cardNameRef = useRef(null);
+      const cardNameLetterRef = useRef(null);
+      const passwordInputRef = useRef(null);
 
-  if(((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122))){
-    event.preventDefault()
-  }
-}
+      function handleNameKeyPress(event) {
+        const charCode = event.charCode;
+        if (
+          (charCode >= 48 && charCode <= 57) || 
+          charCode === 59 ||
+          charCode === 45 || 
+          charCode === 43 || 
+          charCode === 47 || 
+          charCode === 42 || 
+          charCode === 46    
+        ) {
+          event.preventDefault();
+        } 
+      }
 
-function handleCardNumberBlur() {
-  const cardNumberValue = cardNumberRef.current.value;
-  setIsCardNumberEmpty(!isValidCardNumber(cardNumberValue))
-}
-function handleCardNameBlur() {
-  const cardNameValue = cardNameRef.current.value;
-  setIsCardNameEmpty(!cardNameValue);
-}
-function handleCardExpiryBlur() {
-  const cardExpiryValue = cardExpiryRef.current.value;
-  setIsCardExpiryEmpty(!isValidCardExpiry(cardExpiryValue));
-}
-function handleCardCvcBlur() {
-  const cardCvcValue = cardCvcRef.current.value;
-  setIsCardCvcEmpty(!isValidCardCvc(cardCvcValue));
-}
+      function handleCardNameBlur() {
+        const cardNameValue = cardNameRef.current.value;
+        setIsCardNameEmpty(!cardNameValue);
+      }
+      
+      function handdleCardLetterNameBlur() {
+        const cardNameLetter = cardNameLetterRef.current.value;
+        setIsValidLetterEmprt(!cardNameLetter);
+      }
 
-function handdleCardLetterNameBlur(){
-  const cardNameLetter = cardNameLetterRef.current.value
-  setIsValidLetterEmprt(!cardNameLetter)
-}
+      function handleCardPasswordBlur(){
+        const cardPasswordValue = passwordInputRef.current.value;
+        setIsCardPasswordEmpty(!cardPasswordValue)
 
-const addSpacesToCardNumber = (number) => {
-  return number.replace(/\s/g, '').replace(/(\d{4})/g, '$1 ').trim();
-};
+      }
 
-const addSpacesToCardExpiry = (expiry) => {
-  return expiry.replace(/(\d{2})(\d{2})/, '$1/$2').trim();
-};
-
-const addToCardLetter = (name) => {
-  return name.replace(/[^a-zA-Z]+/g, "  ").trim();
-};
-
-console.log(createCards)
-useEffect(() => {
-    
-    const cardsLocalstorage = localStorage.getItem('cards');
-    if (cardsLocalstorage) {
-          const loadCardStorage = JSON.parse(cardsLocalstorage);
-    setCreateCards(loadCardStorage);
+      const addToCardLetter = (name) => {
+        if (typeof name === 'string') {
+          return name.replace(/[^a-zA-Z ]/g, '');
+        } else {
+          return "";
         }
-      }, []);
+      };
 
-      function isValidCardNumber(cardNumber) {
-        return cardNumber && cardNumber.length === 16;
-      }
+      const handleInputChangePassword = (e) => {
+        const password = e.target.value.trim();
+        setCardPassword(password);
 
-      function isValidCardExpiry(cardNumber) {
-        return cardNumber && cardNumber.length === 4;
-      }
-      function isValidCardCvc(cardNumber) {
-        return cardNumber && cardNumber.length === 3;
-      }
+        e.target.value = password
+      
+        setIsPasswordValid( 
+            /[A-Z]/.test(password) &&
+            /\d/.test(password) && /[/[!@#$%^&*]/.test(password) && password.length >= 8
+        );
+      
+        setCapitalValidAz(/[A-Z]/.test(password));
+        setCapitalValidSpecial(/\d/.test(password));
+        setCapitalValidChar(/[!@#$%^&*]/.test(password));
+        setCapitalValidMore(password.length >= 8);
+      };
+      
+    
+  useEffect(() => {
+    const number = Math.floor(1000000000000000 + Math.random() * 9000000000000000);
+    setRandomNumber(number);
 
-        const handleClickBtn = (event) => {
+    const numberCvc = Math.floor(100 + Math.random() * 899);
+    setCardCvc(numberCvc); 
+  }, []);
+
+      
+    useEffect(() => {
+        const cardsLocalstorage = localStorage.getItem('cards');
+        if (cardsLocalstorage) {
+          const loadCardStorage = JSON.parse(cardsLocalstorage);
+          setCreateCards(Array.isArray(loadCardStorage) ? loadCardStorage : []);
+        }      
+    }, []);
+
+      const handleClickBtn = (event) => {
         event.preventDefault();
 
-        const isCardNumberValid = isValidCardNumber(cardNumber);
-        const isCardExpiryValid = isValidCardExpiry(cardExpiry);
-        const isCardCvcValid = isValidCardCvc(cardCvc)
+          if (!cardName) {
+            setIsCardNameEmpty(true);
+            return;
+          } else {
+            setIsCardNameEmpty(false);
+          }
         
-        if (!isCardNumberValid) {
-          setIsCardNumberEmpty(true);
-        } else {
-          setIsCardNumberEmpty(false);
-        }
-      
-        if (!cardName) {
-          setIsCardNameEmpty(true);
-        } else {
-          setIsCardNameEmpty(false);
-        }
-
-        if(cardName.length < 6){
-          setIsValidLetterEmprt(true)
-        }else{
-          setIsValidLetterEmprt(false)
-        }
-
-        if (!isCardExpiryValid) {
-          setIsCardExpiryEmpty(true);
-        } else {
-          setIsCardExpiryEmpty(false);
-        }
-      
-        if (!isCardCvcValid) {
-          setIsCardCvcEmpty(true);
-        } else {
-          setIsCardCvcEmpty(false);
-        }
-        if (cardName.length < 6) {
-          return;
-        }
-        
-        if (!cardNumber || !cardName || !cardExpiry || !cardCvc) {
-          return;
-        }
+          if (cardName.length < 6) {
+            setIsValidLetterEmprt(true);
+            return;
+          } else {
+            setIsValidLetterEmprt(false);
+          }
+          setCardName(createCards)
 
         const newCard = {
           id: Date.now(),
-          number: cardNumber,
+          number: randomNumber,
           name: cardName,
-          expiry: cardExpiry,
+          expiry: new Date().toLocaleDateString("pt-br", {
+            month: "2-digit",
+            year: "2-digit"
+          }),
           cvc: cardCvc,
-          color: backgroundCard
+          color: backgroundCard,
+          password: cardPassword 
         };
 
+        const nameExists = createCards.some((card) => card.name.toLowerCase() === cardName.toLowerCase())
+    
+      if (nameExists) {
+        alert("Já existe um usuario com esse nome cadastrado!!");
+        setCardName('');
+        return
+      }
+
         setCreateCards((prevCards) => {
+ 
           const updatedCards = [...prevCards, newCard];
           localStorage.setItem('cards', JSON.stringify(updatedCards));
-      
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer);
-              toast.addEventListener('mouseleave', Swal.resumeTimer);
-            }
-          });
-      
-          Toast.fire({
-            icon: 'success',
-            title: 'Cartão criado com sucesso'
-          });
-      
-          setCardNumber('');
-          setCardName('');
-          setCardExpiry('');
-          setCardCvc('');
-      
+          navigate("/meus-cartoes")
+
           return updatedCards;
         });
       };
-    
-  return (
-    <>
-      <Header/>
-    <Cards  >
-      <ContainerCard style={{ backgroundColor: backgroundCard}}>
-        <ContextCard>
-          <CardChipIcon />
-          <h2 >{addSpacesToCardNumber(cardNumber)}</h2>
-          <h3 >{addToCardLetter(cardName)}</h3>
-          <span>{addSpacesToCardExpiry(cardExpiry)}</span>
-          <p >{cardCvc}</p>
-        </ContextCard>
-          <Visa/>
-      </ContainerCard>  
-    </Cards>
-
-    <ContainerForm>
-      <Paper>
-        <Form >
-          <input
-            type="tel"
-            name="number"
-            placeholder="Digite Numero"
-            ref={cardNumberRef}
-            onKeyPress={handleNumberKeyPress}
-            onBlur={handleCardNumberBlur}
-            maxLength={16}
-            value={cardNumber}
-            onChange={e =>  setCardNumber(e.target.value)}
-
-          />
-          {isCardNumberEmpty && <small>Preencha o número do cartão!</small>}
-
-          <input
-            type="text"
-            name="name"
-            placeholder="Digite seu Nome"
-            maxLength={18}
-            onKeyPress={handleNameKeyPress ? handleNameKeyPress : handdleCardLetterNameBlur}
-            ref={cardNameRef ? cardNameRef : cardNameLetterRef}
-            onBlur={handleCardNameBlur}
-            value={cardName}
-            onChange={e =>  setCardName(e.target.value)}
-
-          />
-            {isCardNameEmpty && <small>Preencha o nome completo!</small>}
-            {isValidLetterEmprt && <small>necessario ter 8 digitos</small>}
-
-            <input
-              type="text"
-              name="expiry"
-              placeholder="MM/YY"
-              className='expity'
-              onKeyPress={handleNumberKeyPress}
-              ref={cardExpiryRef}
-              onBlur={handleCardExpiryBlur}
-              maxLength={4}
-              value={cardExpiry}
-              onChange={e =>  setCardExpiry(e.target.value)}
-
-            />
-              {isCardExpiryEmpty && <small>Preencha a data de validate!</small>}
-
-            <input
-              type="tel"
-              name="cvc"
-              className='cvc'
-              placeholder="CVC"
-              onKeyPress={handleNumberKeyPress}
-              ref={cardCvcRef}
-              onBlur={handleCardCvcBlur}
-              maxLength={3}
-              value={cardCvc}
-              onChange={e =>  setCardCvc(e.target.value)}
-            />
-              { isCardCvcEmpty && <small>Preencha seu codigo de segurança!</small>}
 
 
-          <label> Escolha a cor do seu Cartão</label>
-            <select value={backgroundCard}  onChange={e => setBackgroundCard(e.target.value)}>
-              <option value="white">branco</option>
-              <option value="black">preto</option>
-              <option value="red">Vermelho</option>
-              <option value="pink">Rosa</option>
-              <option value="blue">Azul</option>
-            </select>
+      const handleInputChangeName = (e) => {
+        const name = e.target.value.trimStart()
+        setCardName(name)
+      } 
 
-          <button type="submit" onClick={ handleClickBtn }>
-            Confirmar
-          </button>
-        </Form>
-      </Paper>
-    </ContainerForm>
-    </>
+      const showHidePassword = (event) => {
+        event.preventDefault();
+        setShow((prevIsHidden) => !prevIsHidden);
+      };
 
-  );
-};
+      return (
+        <>
+          <Header/>
+          <ContainerForm>
+            <Paper> 
+              <ContainerCardSelect>
+                <h3 className='custom-title'>Crie agora seu Cartão SIGMABANK <br /><span className='custom'>personalizado</span>  do seu jeito!</h3>
+                <Cards>
+                  <ContainerCard style={{ backgroundColor: backgroundCard}}>
+                      <ContextCard>
+                        <ModalInformation/>
+                        <img src={Logo} alt="" />
+                        <h3>{addToCardLetter(cardName)}</h3>
+                      </ContextCard>
+                      <Visa/>
+                    </ContainerCard>  
+                </Cards>
 
-export default CreditCard;
+                <label> Escolha a cor do seu Cartão</label>
+                <select value={backgroundCard} onChange={(e) => setBackgroundCard(e.target.value)}>
+                  <option value="#ffffff">White</option>
+                  <option value="#111111">Black</option>
+                  <option value="#984B43">Rusty Red</option>
+                  <option value="#76323F">Oxblood</option> 
+                  <option value="#EC576B">Pink</option>
+                  <option value="#4717F6">Jemel</option>
+                </select>
+              </ContainerCardSelect>
+      
+              <Form onSubmit={handleClickBtn}>
+                <label className='label-name'>Digite seu nome completo</label>
+              <input
+                  type="text"
+                  name="name"
+                  placeholder="Digite seu Nome"
+                  maxLength={26}
+                  onKeyPress={handleNameKeyPress ? handleNameKeyPress : handdleCardLetterNameBlur}
+                  ref={cardNameRef ? cardNameRef : cardNameLetterRef}
+                  onBlur={handleCardNameBlur}
+                  value={cardName}
+                  onChange={handleInputChangeName}
+                  />
 
+
+                {isCardNameEmpty && <small>Preencha o nome completo!</small>}
+                {isValidLetterEmpty && <small>Necessário ter 6 ou mais caracteres</small>}
+
+                <Container>
+                        <label className='label'>Digite sua senha Digital</label>
+                      <div>
+                        <input
+                          className="input-is-hidden"
+                          type={show ? "text" : "password"}
+                          placeholder="digite sua senha"
+                          onChange={handleInputChangePassword}
+                          ref={passwordInputRef} 
+                          onBlur={handleCardPasswordBlur}
+
+                        />
+                        <button className="btn-is-hidden" onClick={showHidePassword}>
+                          {show ? <AiFillEye /> : <GrFormViewHide />}
+                        </button>
+                      </div>
+                      <div className="container-isValid">
+                        <p className="capital">
+                          {isCapitalValidAz ? <Check /> : <Times />}
+                          <span>letra maiúscula</span>
+                        </p>
+                        <p>
+                          {isCapitalValidSpecial ? <Check /> : <Times />}
+                          <span>usar números</span>
+                        </p>
+                        <p>
+                          {isCapitalValidChar ? <Check /> : <Times />}
+                          <span>caracteres especiais</span>
+                        </p>
+                        <p>
+                          {isCapitalValidMore ? <Check /> : <Times />}
+                          <span>8+ caracteres</span>
+                        </p>
+                      </div>
+                </Container>
+                        {isCardPasswordEmpty && <small>Campo de senha obrigatorio</small> }
+
+
+                  <button type="submit" disabled={!isPasswordValid}>
+                    Confirmar
+                  </button>
+              </Form>
+            </Paper>
+          </ContainerForm>
+        </>
+      );
+    };
+
+    export default CreditCard;
