@@ -7,7 +7,6 @@ export const Container = styled.header`
     background-color: #0375B4;
 
 `
-
 export const Hamburguer = styled(FaBars)`
     color: #ededed;
     width: 20px;
