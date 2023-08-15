@@ -2,7 +2,7 @@ import { BsFillPatchCheckFill } from "react-icons/bs";
 import styled from "styled-components";
 
 export const ContainerSection = styled.section`
-  height: 100vh;
+  min-height: 100vh;
   background-color: #FFFFFF;
 `;
 
@@ -16,7 +16,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 400px;
-  min-height: 520px;
+  min-height: 500px;
+  border-radius: 6px;
   text-align: center;
   align-items: center;
   margin-top: 30px;
@@ -83,7 +84,7 @@ export const Container = styled.div`
   @media (max-width: 768px) {
     margin-bottom: 50px;
     min-height: 540px;
-    width: 350px;
+    width: 330px;
   }
 `;
 
