@@ -1,4 +1,4 @@
-import { AiOutlineEye, AiTwotoneDelete } from "react-icons/ai";
+import { AiOutlineEye } from "react-icons/ai";
 import { BiHide, BiLogoVisa } from "react-icons/bi";
 import { FcSimCardChip } from "react-icons/fc";
 import { IoIosArrowForward } from "react-icons/io";
@@ -22,29 +22,28 @@ export const CardsContainer = styled.div`
   position: relative;
   width: 100%;
   max-width: 340px;
-  height: 380px;
+  height: 325px;
   margin: 40px 10px;
   margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   padding: 20px;
-  background-color: #ECECEC;
-
-
+  background-color: #D2D2D2;
 `;
 
 export const Cards = styled.div`
   background-color: ${({ color }) => color};
-  
   width: 300px;
   height: 180px;
   margin: 10px;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 8px;
   position: relative;
   text-align: center;
   justify-content: center;
   align-items: center;
   margin: auto;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.60);
 
 
   .btnBlock {
@@ -87,6 +86,69 @@ export const Cards = styled.div`
   }
 `;
 
+export const CreateCards = styled.div`
+    width: 340px;
+    height: 325px;
+    background-color: #D2D2D2;
+    padding: 10px;
+    margin: 40px 10px 0;
+    border-radius: 8px;
+
+    img{
+      margin-top: 30px;
+    }
+
+    p{
+      color: #3B3B3B;
+    }
+
+    .border-color-plus{
+      height: 2px; 
+      width: 80%;
+      background-color: #B3B3B3;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      margin-top: 10px;
+    }
+
+    .btn-card-plus{
+      margin-top: 20px;
+      height: 40px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      height: 50px;
+      padding-left: 10px;
+      cursor: pointer;
+      background-color: #ECECEC;
+    }
+
+    button{
+      position: relative;
+    }
+
+    button:hover{
+    background-color: #AED8EF99;
+    }
+    
+    .icon-card{
+      position: absolute;
+      left: 10px;
+      bottom: 5px;
+    }
+
+    @media (max-width: 1080px){
+
+      &{
+        margin-bottom: 50px;
+      }
+
+    }
+
+`
+
 export const Lock = styled(BiHide)`
   font-size: 24px;
   border-radius: 50px;
@@ -106,15 +168,6 @@ export const OpenLock = styled(AiOutlineEye)`
   color: #000;
   cursor: pointer;
 `
-export const Delete = styled(AiTwotoneDelete)`
-  font-size: 22px;
-  display: flex;
-
-  &:hover{
-    color: red;
-    cursor: pointer;
-  }
-`
 
 export const ContainerFunctions = styled.div`
   display:flex;
@@ -126,8 +179,14 @@ export const ContainerFunctions = styled.div`
   width: 100%;
   gap: 5px;
 
+  .title-digital{
+    font-size: 14px;
+    color: #00000099;
+  }
+
   .border-card{
     height: 2px;
+    margin-bottom: 10px;
     width: 100%;
     background-color: #C7C7C7;
   }
@@ -151,10 +210,11 @@ export const ButtonDelete = styled.button`
   background-color: none;
   border: none;
   width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   height: 50px;
   padding-left: 10px;
   cursor: pointer;
-
   background-color: #ECECEC;
 
   &:hover{
@@ -164,6 +224,11 @@ export const ButtonDelete = styled.button`
   &:active{
     border-radius: 5px;
     border: 2px solid #0A9AE9;
+  }
+
+  img{
+    width: 20px;
+    margin-right: 5px;
   }
 
 
