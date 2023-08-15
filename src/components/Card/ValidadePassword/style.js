@@ -68,4 +68,25 @@ div{
         font-size: 14px;
         margin-top: 4px;
     }
+
+    @media (max-width: 1260px) {
+  
+    }
+
+    @media (max-width: 926px) {
+
+      
+      .input-is-hidden {
+        width: 268px;
+      }
+      .container-isValid{
+        width: 300px;
+        margin-left: 4px;
+      }
+      p{
+        padding-left: 2px;
+        width: 268px;
+      }
+    }
+
 `

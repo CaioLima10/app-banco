@@ -34,7 +34,7 @@ export const ContainerModal = styled.div`
     height: 60px;
     top: -5.2rem;
     right: 0;
-    background-color: #fff;
+    background-color: #d9d9d9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.10);
     border: 1px solid #FF3B3F;
     z-index: 2;
