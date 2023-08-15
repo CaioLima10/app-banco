@@ -25,12 +25,35 @@ export default function Sent() {
           <small className="date">{recentTransaction.date}</small> 
           <div className="border"></div><br /> 
           <span>R$ {recentTransaction.number}</span>
-           <div className="border"></div><br /> 
-           <div className="name"><p id="send">De: </p>SigmaBank </div>
-          <div className="name"><p id="send">Para: </p>{recentTransaction.name} </div>
-          {recentTransaction.cpf && <div className="type-dados">cpf: {recentTransaction.cpf}</div>}
-          {recentTransaction.cnpj && <div className="type-dados">cnpj: {recentTransaction.cnpj}</div>}
-          {recentTransaction.telephone && <div className="type-dados">telefone: {recentTransaction.telephone}</div>}
+          <div className="border"></div><br /> 
+          <div className="name"><p id="send">De: </p>SigmaBank </div>
+          <div className="name"><p id="send">Para: </p>
+
+        {recentTransaction.selectedOption === 'cpf' && (
+          <div>{recentTransaction.userCpf}</div>
+        )}
+        {recentTransaction.selectedOption === 'cnpj' && (
+          <div>{recentTransaction.userCnpj}</div>
+        )}
+        {recentTransaction.selectedOption === 'telephone' && (
+          <div>{recentTransaction.userTelephone}</div>
+        )}
+          </div>
+          {recentTransaction.cpf && 
+          <div className="type-dados">
+            cpf: {recentTransaction.cpf}
+          </div>
+          }
+          {recentTransaction.cnpj && 
+          <div className="type-dados">
+            cnpj: {recentTransaction.cnpj}
+          </div>
+          }
+          {recentTransaction.telephone && 
+          <div className="type-dados">
+            telefone: {recentTransaction.telephone}
+          </div>
+          }
           <div className="title-sigmabank"> conta: SigmaBank </div>
 
           <Link to="/pagamentos">
