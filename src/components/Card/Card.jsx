@@ -8,6 +8,7 @@
     import { Check, Container, Times } from "./ValidadePassword/style";
     import Logo from "../../assets/LOGO-GOLD.png"
     import { useNavigate } from 'react-router-dom';
+import StyleColorGlobal from '../styleColorGlobal';
 
     const CreditCard = () => {
       const storedColor = JSON.parse(localStorage.getItem('backgroundCard'));
@@ -175,10 +176,11 @@
       return (
         <>
           <Header/>
+          <StyleColorGlobal/>
           <ContainerForm>
             <Paper> 
               <ContainerCardSelect>
-                <h3 className='custom-title'>Crie agora seu Cartão SIGMABANK <br /><span className='custom'>personalizado</span>  do seu jeito!</h3>
+                <h3 className='custom-title'>Crie agora seu Cartão SIGMABANK <br /> personalizado do seu jeito!</h3>
                 <Cards>
                   <ContainerCard style={{ backgroundColor: backgroundCard}}>
                       <ContextCard>
@@ -190,14 +192,14 @@
                     </ContainerCard>  
                 </Cards>
 
-                <label> Escolha a cor do seu Cartão</label>
+                <label className='title-color'> Escolha a cor do seu Cartão</label>
                 <select value={backgroundCard} onChange={(e) => setBackgroundCard(e.target.value)}>
                   <option value="#ffffff">White</option>
                   <option value="#111111">Black</option>
-                  <option value="#984B43">Rusty Red</option>
+                  <option value="#1A2937">Blue Dark</option>
                   <option value="#76323F">Oxblood</option> 
-                  <option value="#EC576B">Pink</option>
-                  <option value="#4717F6">Jemel</option>
+                  <option value="#124714">green</option>
+                  <option value="#393EAA">Jemel</option>
                 </select>
               </ContainerCardSelect>
       
