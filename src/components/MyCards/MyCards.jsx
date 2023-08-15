@@ -7,17 +7,22 @@ import {
         ButtonDelete, 
         Lock, 
         OpenLock, 
-        Delete,  
         ContainerCvcExpiry, 
         ContainerFunctions, 
         ArrowForward, 
         Cards,
-        TitleVisa} from "./styles";
+        TitleVisa,
+        CreateCards} from "./styles";
 
 import Header from "../Header/Header";
 import React, { useState, useEffect } from "react";
 import Swal from 'sweetalert2';
 import Logo from "../../assets/LOGO-GOLD.png"
+import ImgCard from "../../assets/Group 22.png"
+import IconCardPlus from "../../assets/Group 35.png"
+import iconDelete from "../../assets/Bin.png"
+import { Link } from "react-router-dom";
+import StyleColorGlobal from "../styleColorGlobal";
 
 export default function MyCards() {
   const storedCards = JSON.parse(localStorage.getItem('cards')) || [];
@@ -96,7 +101,7 @@ export default function MyCards() {
   return (
     <>
       <Header />
-      
+      <StyleColorGlobal/>
       <Container>
         <CardList>
           {createCards.map((item , index) => (
@@ -117,7 +122,7 @@ export default function MyCards() {
                   </div>
                   <h2  style={{ color: backgroundCard }}>{item.number}</h2>
 
-                  <ContainerCvcExpiry>
+                    <ContainerCvcExpiry>
                   <small style={{ color: backgroundCard }}> <p className="create">EMITIDO</p> 
                   {addSpacesToCardExpiry(item.expiry)}  <small className="validate"><p>VALIDADE</p> 05/27</small> </small>
                   <small style={{ color: backgroundCard }}><p>CVV</p>{item.cvc}</small>
@@ -129,6 +134,7 @@ export default function MyCards() {
                 </DescribeContainer>
 
                 <ContainerFunctions>
+                  <p className="title-digital">Cartão Digital</p>
                   <div className="border-card"></div>
                   <ButtonDelete
                     $completed={item.isCompleted ? "checked-block" : "remove-block"}
@@ -136,7 +142,7 @@ export default function MyCards() {
                     disabled={item.isCompleted}
                     onClick={() => handleDeleteCard(item.id)}
                   >
-                    <Delete />
+                    <img src={iconDelete} alt="" />
                     <p>Excluir o cartão</p>
                     <ArrowForward />
                   </ButtonDelete>
@@ -150,6 +156,16 @@ export default function MyCards() {
               </CardsContainer>
             </React.Fragment>
           ))}
+                <CreateCards>
+                  <div>
+                    <img src={ImgCard} alt="image-plus" />
+                    <p>Espaço vazio para cartão</p>
+                    <div className="border-color-plus"></div>
+                      <Link to="/" >
+                        <button className="btn-card-plus"><img className="icon-card" src={IconCardPlus} alt="card-plus" />Criar novo Cartão </button>
+                      </Link>
+                  </div>
+                </CreateCards>
         </CardList>
       </Container>
     </>
