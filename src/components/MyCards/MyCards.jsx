@@ -15,14 +15,14 @@ import {
         CreateCards} from "./styles";
 
 import Header from "../Header/Header";
-import React, { useState, useEffect } from "react";
-import Swal from 'sweetalert2';
+import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../assets/LOGO-GOLD.png"
 import ImgCard from "../../assets/Group 22.png"
 import IconCardPlus from "../../assets/Group 35.png"
 import iconDelete from "../../assets/Bin.png"
 import { Link } from "react-router-dom";
 import StyleColorGlobal from "../styleColorGlobal";
+import Dialog from "./Dialog";
 
 export default function MyCards() {
   const storedCards = JSON.parse(localStorage.getItem('cards')) || [];
@@ -32,6 +32,21 @@ export default function MyCards() {
   const [deleteCard, setDeleteCard] = useState(filteredCards);
   const [createCards, setCreateCards] = useState(filteredCards);
   const [backgroundCard, setBackgroundCard] = useState(storedColor || "rgb(157,156,156)");
+
+
+  const idCardRef = useRef() 
+  const handleDialog = ( message , isLoading ) => {
+    setDialog({
+      message,
+      isLoading
+
+    })
+  }
+
+  const [ dialog , setDialog ] = useState({
+    message: 'deseja realmente deletar',
+    isLoading: false
+  })
 
   useEffect(() => {
     localStorage.setItem('cards', JSON.stringify(createCards));
@@ -66,37 +81,26 @@ export default function MyCards() {
   };
 
   const handleDeleteCard = (id) => {
-    const cardIndex = deleteCard.findIndex((card) => card.id === id);
+    handleDialog("Deseja mesmo deletar... essa ação não poderá voltar atrás", true)
 
-    Swal.fire({
-      title: 'Tem certeza?',
-      text: "Você não será capaz de reverter isso!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sim, apague!',
-      cancelButtonText: 'Cancelar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          'Excluído!',
-          'Seu arquivo foi excluído.',
-          'success'
-        );
+    idCardRef.current = id
 
-        if (cardIndex !== -1) {
+      }
+
+    const areUSuruDelete = (choose) => {
+        if(choose){
+          const cardIndex = deleteCard.findIndex((card) => card.id === idCardRef.current);
           const updateCard = [...deleteCard];
           updateCard.splice(cardIndex, 1);
-
+          localStorage.setItem('cards', JSON.stringify(updateCard));
           setDeleteCard(updateCard);
           setCreateCards(updateCard);
-
-          localStorage.setItem('cards', JSON.stringify(updateCard));
+          handleDialog("", false)
+        }else{
+          handleDialog("", false)
         }
-      }
-    });
-  };
+    }
+
 
   return (
     <>
@@ -124,7 +128,8 @@ export default function MyCards() {
 
                     <ContainerCvcExpiry>
                   <small style={{ color: backgroundCard }}> <p className="create">EMITIDO</p> 
-                  {addSpacesToCardExpiry(item.expiry)}  <small className="validate"><p>VALIDADE</p> 05/27</small> </small>
+                  {addSpacesToCardExpiry(item.expiry)}  <small className="validate"><p>VALIDADE</p> 05/27</small>
+                  </small>
                   <small style={{ color: backgroundCard }}><p>CVV</p>{item.cvc}</small>
                   </ContainerCvcExpiry>
                   <TitleVisa>
@@ -167,6 +172,7 @@ export default function MyCards() {
                   </div>
                 </CreateCards>
         </CardList>
+          { dialog.isLoading &&   <Dialog onDialog={areUSuruDelete} message={dialog.message}/>}
       </Container>
     </>
   );
