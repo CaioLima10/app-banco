@@ -13,9 +13,10 @@ export const Container = styled.div`
 export const Button = styled.button`
     width: 100%;
     position: absolute;
-    max-width: 40px;
+    max-width: 30px;
+    height: 25px;
+    border-radius: 50%;
     right: -18px;
-    padding: 1px;
     font-size: 22px;
     background: none;
     border: none;
@@ -34,12 +35,17 @@ export const ContainerModal = styled.div`
     height: 60px;
     top: -5.2rem;
     right: 0;
-    background-color: #d9d9d9;
+    background-color: #FFFFFF;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.10);
     border: 1px solid #FF3B3F;
     z-index: 2;
     padding: 7px;
     transition: all 1s ease-in-out; 
+
+    @media (max-width: 786px){
+     width: 300px;
+     height: 65px;
+    }
 
     `
 
