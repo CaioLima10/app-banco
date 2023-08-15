@@ -92,6 +92,7 @@ export const CreateCards = styled.div`
     background-color: #D2D2D2;
     padding: 10px;
     margin: 40px 10px 0;
+    margin-bottom: 40px;
     border-radius: 8px;
 
     img{
@@ -140,15 +141,12 @@ export const CreateCards = styled.div`
     }
 
     @media (max-width: 1080px){
-
       &{
         margin-bottom: 50px;
       }
 
     }
-
 `
-
 export const Lock = styled(BiHide)`
   font-size: 24px;
   border-radius: 50px;
@@ -284,8 +282,7 @@ justify-content: flex-end;
 margin: auto;
 width: 100%;
 margin-bottom: 20px;
-margin-top: 15px;
-
+margin-top: 15px; 
 `
 
 export const Visa = styled(BiLogoVisa)`
