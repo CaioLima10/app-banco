@@ -1,32 +1,39 @@
-import { AiOutlineEye } from "react-icons/ai";
-import { BiHide } from "react-icons/bi";
 import { CgCreditCard } from "react-icons/cg"
 import Header from "../Header/Header";
-import { ContaineIconArrowDown, Container, ContainerExtract, ContainerHidden, Form } from "./style";
+import { ContaineIconArrowDown, 
+          Container, 
+          ContainerExtract, 
+          Form , 
+          ContainerValue, 
+          Section } from "./style";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+import StyleColorGlobal from "../styleColorGlobal";
+import { AiFillInfoCircle } from "react-icons/ai";
+import { currentMask } from "./mask";
 
 export default function Pix() {
-    const [inputNumber, setInputNumber] = useState("");
-    const [inputName, setInputName] = useState("");
-    const [inputDescribe, setInputDescribe] = useState("");
-    const [createPix, setCreatePix] = useState([]);
 
-    const [hide, setHide] = useState(9999999);
-    const [isHidden, setIsHidden] = useState(false);
+    const [ usersCpf , setUsersCpf ] = useState("Caio Lima")
+    const [ usersCnpj , setUsersCnpj ] = useState("Ygor Mendes")
+    const [ usersTelephone , setUsersTelephone ] = useState("Gael Edward")
+
+    const [cpfErrorMessage, setCpfErrorMessage] = useState("");
+    const [cnpjErrorMessage ,  setCnpjErrorMessage ] = useState("")
+    const [ telephoneErrorMessage , setTelephoneErrorMessage ] = useState("")
+
+    const [inputNumber, setInputNumber] = useState("");
+    const [ textereaDescribe, setTextereaDescribe] = useState("");
+    const [createPix, setCreatePix] = useState([]);
     const [openInputCpf, setOpenInputCpf] = useState(false);
     const [openInputCnpj, setOpenInputCnpj] = useState(false);
-    const [openInputTelephone, setOpenInputTelephone] = useState(false);
+    const [openInputTelephone, setOpenInputTelephone]   = useState(false);
     const [ desconto , setDesconto ] = useState(0)
     const [totalDiscount, setTotalDiscount] = useState(0);
-
-    const [isPixNameEmpty , setIsPixNameEmpty] = useState("")
     const [ isPixPriceEmpty , setIsPixPriceEmpty] = useState("")
+    const [selectedOption, setSelectedOption] = useState(""); 
 
-
-  const pixNameRef = useRef()
   const pixPriceRef = useRef()
-
   const navigate = useNavigate();
 
   function handleNumberKeyPress(event) {
@@ -39,107 +46,93 @@ export default function Pix() {
   }
 
   useEffect(() => {
-    const storedIsHidden = localStorage.getItem('isHidden');
-    setIsHidden(storedIsHidden ? JSON.parse(storedIsHidden) : false);
-
-    const storedHide = localStorage.getItem('PixHide');
-    setHide(storedHide);
-
     const storedPixData = localStorage.getItem('Pix');
     const parsedPixData = storedPixData ? JSON.parse(storedPixData) : [];
     setCreatePix(parsedPixData);
 
 }, []);
 
-    useEffect(() => {
-        const storedIsHidden = localStorage.getItem('isHidden');
-        setIsHidden(storedIsHidden ? JSON.parse(storedIsHidden) : false);
-        return
-    }, []);
-
-    function toggleVisibility() {
-      const newValue = !isHidden;
-    setIsHidden(newValue);
-      localStorage.setItem('isHidden', JSON.stringify(newValue));
-    }
-
     function handleClickPix(event) {
       event.preventDefault();
-      
-
-      if(!inputName || !inputNumber){
+     
+      if(!inputNumber 
+        && !usersCpf 
+        && !usersCnpj 
+        && !usersTelephone
+        ){
         return
       }
-      if (!openInputCpf && !openInputCnpj && !openInputTelephone) {
+      if (!openInputCpf 
+          && !openInputCnpj 
+          && !openInputTelephone) {
         return
       }
 
-      setInputNumber("");
-      setInputName("");
-      setInputDescribe("");
-      setOpenInputCpf(false);
-      setOpenInputCnpj(false);
-      setOpenInputTelephone(false);
       setDesconto(0);
     
       const newPix = {
+        userCpf: usersCpf,
+        userCnpj: usersCnpj,
+        userTelephone: usersTelephone, 
         number: inputNumber,
-        name: inputName,
-        describe: inputDescribe,
-        descont: totalDiscount,
+        describe: textereaDescribe,
         cpf: openInputCpf,
         cnpj: openInputCnpj,
         telephone: openInputTelephone,
-        price: hide,
-        Hidden: isHidden,
         date: new Date().toLocaleDateString("pt-br", {
           hour: '2-digit',
           minute: '2-digit',
           second: '2-digit'
         }),
       };
-    
-      setCreatePix((prevState) => {
-        const updatePix = [...prevState, newPix];
-        setTotalDiscount(totalDiscount + desconto);
-        localStorage.setItem('Pix', JSON.stringify(updatePix));
-        navigate("/enviado", { state: newPix });  
-        return updatePix;
-      });
+
+      if (openInputCpf && isValidCpf(openInputCpf)) {
+        if (openInputCpf === "111.111.111-11") {
+          setUsersCpf(usersCpf)
+
+        } else {
+        setCpfErrorMessage(" CPF digitado não foi encontrado.")
+        return
+        }
     }
-    
-
-  useEffect(() => {
-      const storedIsHidden = localStorage.getItem('isHidden');
-      setIsHidden(storedIsHidden ? JSON.parse(storedIsHidden) : false);
-
-      const storedHide = localStorage.getItem('PixHide');
-      setHide(storedHide ? parseFloat(storedHide) : 9999999);
-  }, []);
-  
-  useEffect(() => {
-
-    localStorage.setItem('PixHide', hide.toString());
-      }, [hide]);
-
-    function handlePrice(e) {
-      let value = e.currentTarget.value;
-      value = value.replace(/\D/g, "").trim();
-  
-      if (value === "") {
-        setHide(9999999 - totalDiscount);
-        setDesconto(0);
-        localStorage.setItem('PixHide', hide);
-        localStorage.setItem('PixHide', 9999999 - totalDiscount);
+    if (openInputCnpj && isValidCnpj(openInputCnpj)) {
+      if (openInputCnpj === "11.111.111.1111/11") {
+        setUsersCnpj(usersCnpj)
       } else {
-        const numericValue = parseFloat(value);
-        const newValue = Math.max(9999999 - numericValue - totalDiscount, 0);
-        const currentDiscount = newValue;
-        setDesconto(currentDiscount);
-        setHide(newValue);
-      }
+      setCnpjErrorMessage(" CNPJ digitado não foi encontrado.")
       return
+      }
+  }
+
+    if(openInputTelephone && isValidTelephone(openInputTelephone)){
+      if(openInputTelephone === "(11) 11111-1111"){
+        setUsersTelephone(usersTelephone)
+      }else{
+        setTelephoneErrorMessage("Telefone digitado não foi encontrado.")
+        return
+      }
     }
+    if(open)
+    setCreatePix((prevState) => { 
+      const updatePix = [...prevState, newPix];
+      setTotalDiscount(totalDiscount + desconto);
+      localStorage.setItem('Pix', JSON.stringify(updatePix));
+      navigate("/enviado", { state: { ...newPix, selectedOption } }); 
+      return updatePix;
+  });
+  
+    }
+  
+    function isValidCpf(){
+      return true 
+    }
+    function isValidCnpj(){
+      return true
+    }
+    function isValidTelephone(){
+      return true
+    }
+
 
     function handleRegexCpf(e) {
         let value = e.currentTarget.value;
@@ -172,6 +165,7 @@ export default function Pix() {
         return
     }
 
+  
     const addToCardLetter = (name) => {
       if (typeof name === 'string') {
         return name.replace(/[^a-zA-Z ]/g, '');
@@ -180,44 +174,10 @@ export default function Pix() {
       }
     };
 
-      function handleNameKeyPress(event) {
-        const charCode = event.charCode;
-        setInputName("");
-
-        if (
-          (charCode >= 48 && charCode <= 57) || 
-          charCode === 59 ||
-          charCode === 45 || 
-          charCode === 43 || 
-          charCode === 47 || 
-          charCode === 42 || 
-          charCode === 46    
-        ) {
-          event.preventDefault();
-        } 
-      }
-
-      
-      
-      const handleInputChangeName = (event) => {
-          const name = event.target.value.trimStart()
-
-          setInputName("");
-          event.target.value = name
-          setInputName(name)
-        } 
-
         const handleInputChangePrice = (event) => {
           const price = event.target.value.trim()
-
           event.target.value = price
-
           setInputNumber(price)
-        }
-
-        function handlePixNameBlur() {
-          const pixNameValue = pixNameRef.current.value;
-          setIsPixNameEmpty(!pixNameValue);
         }
 
         function handleCardPriceBlur(){
@@ -225,99 +185,73 @@ export default function Pix() {
           setIsPixPriceEmpty(!pixPriceValue)
         }
 
+
     return (
         <>
-            <Header />
+          <Header />
+          <StyleColorGlobal/>
+          <Section>
             <Container>
                 <Form>
                     <div className="container-value">
+                      <p>Digite o valor a ser enviado</p>
                         <input
+                          className="input-price"
                             value={inputNumber}
-                            onChange={handleInputChangePrice}
+                            maxLength={10}
+                            onChange={(e) => handleInputChangePrice(currentMask(e))}
                             onKeyPress={handleNumberKeyPress}
-                            maxLength={7}
-                            className="input-price"
-                            placeholder="Digite o Valor"
-                            onKeyUp={handlePrice}
+                            placeholder="R$ 0.00"
                             ref={pixPriceRef}
                             onBlur={handleCardPriceBlur}
                         />
                     </div>
                         {isPixPriceEmpty && <small>Digite o valor</small>}
 
-                    <div>
-                        <input
-                            className="input-name"
-                            type="text"
-                            placeholder="para:"
-                            onKeyPress={handleNameKeyPress}
-                            onChange={handleInputChangeName}
-                            onBlur={handlePixNameBlur}
-                            ref={pixNameRef}
-                        />
-                    </div>
-                        {isPixNameEmpty && <small>Preencha o nome, precisamos saber destinatario!</small>}
-                    <div className="container-texterea">
-                        <textarea
-                            onChange={(e) => setInputDescribe(e.target.value)}
-                            name=""
-                            id=""
-                            cols="30"
-                            rows="10"
-                            placeholder="descrição"
-                        ></textarea>
-                    </div>
-                    <div className="container-input">
-                        <label> CPF: </label>
-                        <input
-                            name="input"
-                            type="radio"
-                            value="cpf"
-                            checked={openInputCpf}
-                            onChange={() => {
-                                setOpenInputCpf(true);
-                                setOpenInputCnpj(false);
-                                setOpenInputTelephone(false);
-                            }}
-                        />
-                        <label> CNPJ: </label>
-                        <input
-                            name="input"
-                            type="radio"
-                            value="cnpj"
-                            checked={openInputCnpj}
-                            onChange={() => {
-                                setOpenInputCpf(false);
-                                setOpenInputCnpj(true);
-                                setOpenInputTelephone(false);
-                            }}
-                        />
-                        <label> TELEFONE: </label>
-                        <input
-                            name="input"
-                            type="radio"
-                            value="telephone"
-                            checked={openInputTelephone}
-                            onChange={() => {
-                                setOpenInputCpf(false);
-                                setOpenInputCnpj(false);
-                                setOpenInputTelephone(true);
-                            }}
-                        />
-                    </div>
-                    <div>
+                        <span className="info-select">Para quem você quer transferir</span>
+                        <span className="info-select-two">Escolha o tipo de dado e preencha o campo.</span>
+                        <div className="container-input">
+                        <select value={selectedOption} onChange={(e) => {
+                            setSelectedOption(e.target.value);
+
+                            if (e.target.value === 'cpf') {
+                              setOpenInputCpf(true);
+                              setOpenInputCnpj(false);
+                              setOpenInputTelephone(false);
+
+                            } else if (e.target.value === 'telephone') {
+                              setOpenInputCpf(false);
+                              setOpenInputCnpj(false);
+                              setOpenInputTelephone(true);
+
+                            } else if (e.target.value === 'cnpj') {
+                              setOpenInputCpf(false);
+                              setOpenInputCnpj(true);
+                              setOpenInputTelephone(false);
+                            }
+                        }}>
+                          <option selected hidden>Escolha opção</option>
+                          <option value="cpf">CPF</option>
+                          <option value="cnpj">CNPJ</option>
+                          <option value="telephone">Telefone</option>
+                        </select>
                         {openInputCpf && (
                             <input
+                                
                                 type="text"
                                 maxLength={11}
+                                className="input-select"
+                                id="inputCpf"
                                 onBlur={handleRegexCpf}
                                 onKeyUp={handleRegexCpf}
                                 placeholder="digite seu cpf"
-                            />
+                              />
                         )}
+
                         {openInputCnpj && (
                             <input
                                 type="text"
+                                className="input-select"
                                 maxLength={14}
                                 onBlur={handleRegexCnpj}
                                 onKeyUp={handleRegexCnpj}
@@ -327,6 +261,7 @@ export default function Pix() {
                         {openInputTelephone && (
                             <input
                                 type="text"
+                                className="input-select"
                                 maxLength={15}
                                 onBlur={handleRegexTelephone}
                                 onKeyUp={handleRegexTelephone}
@@ -334,25 +269,45 @@ export default function Pix() {
                             />
                         )}
                     </div>
+                    {
+                      cpfErrorMessage && cpfErrorMessage ? 
+                      <p className="error-message">
+                        <span className="icon-fill"><AiFillInfoCircle/></span> 
+                          {cpfErrorMessage} 
+                      </p> : ""
+                      || cnpjErrorMessage && cnpjErrorMessage ? 
+                      <p className="error-message">
+                        <span className="icon-fill"><AiFillInfoCircle/></span>
+                          {cnpjErrorMessage} 
+                      </p> : "" 
+                      || telephoneErrorMessage && telephoneErrorMessage ? 
+                      <p className="error-message">
+                        <span className="icon-fill"><AiFillInfoCircle/></span>
+                          {telephoneErrorMessage} 
+                      </p> : ""
+                    }
+                    <div className="container-texterea">
+                      <span className="title-optional">Digite uma descrição</span>
+                        <textarea
+                            onChange={(e) => setTextereaDescribe(e.target.value)}
+                            name=""
+                            id=""
+                            cols="30"
+                            rows="6"
+                            placeholder="Opcional"
+                        ></textarea>
+                    </div>
                     <div>
                         <button type="submit" onClick={handleClickPix}>
-                            Confirmar
+                            Prosseguir
                         </button>
+                        
                     </div>
                 </Form>
+                </Container>
 
+              <ContainerValue>
                 <ContaineIconArrowDown>
-                <ContainerHidden>
-                    <span>
-                    <p>Saldo disponivel</p> 
-                    <div className="container-hide">
-                        {isHidden ? "*****" : hide}
-                        <button onClick={toggleVisibility}>
-                            {isHidden ? <AiOutlineEye /> : <BiHide />}
-                        </button>
-                    </div>
-                    </span>
-                </ContainerHidden>
                     <ContainerExtract>
                       <p className="title-extract">Extrato</p>
                         {createPix.map((item, index) => (
@@ -362,16 +317,23 @@ export default function Pix() {
                                   <CgCreditCard/>
                                 </div>
                                 <div className="name-number">
+                                  <div>
+                                      <small>{item.cpf ? usersCpf : ""}</small>
+                                      <small>{item.cnpj ? usersCnpj : ""}</small>
+                                      <small> {item.telephone ? usersTelephone : ""} </small>
+                                  </div>
                                   <small className="name">{addToCardLetter(item.name)} </small>
                                   <span className="number">R$ {item.number}</span>
                                 </div>
                                 <div className="type-date">
                                     <span className="title-type">tipo de transferencia: PIX </span>
                                     <small className="date" > {item.date}</small>
+
                                 </div>
                                 {item.cpf && <small className="dados">cpf: {item.cpf}</small>}
                                 {item.cnpj && <small className="dados">cnpj: {item.cnpj}</small>}
                                 {item.telephone && <small className="dados">telefone: {item.telephone}</small>}
+                                {item.email && <small className="dados">email: {item.email}</small>}
                               </div>
                               <small className="describe"> Descrição: {item.describe}</small>
 
@@ -380,7 +342,8 @@ export default function Pix() {
                         ))}
                     </ContainerExtract>
                 </ContaineIconArrowDown>
-            </Container>
+                </ContainerValue>
+              </Section> 
         </>
     );
 }
