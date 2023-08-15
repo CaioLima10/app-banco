@@ -46,4 +46,14 @@ export const Content = styled.div`
     justify-content: center;
     align-items: center;
     
+
+    img{
+        display: flex;
+        left: 38%;
+        right: 50%;
+        bottom: -100px;
+        position: absolute;
+        width: 80px;
+    }
+
 `
