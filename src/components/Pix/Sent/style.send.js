@@ -19,7 +19,7 @@ export const Container = styled.div`
   min-height: 520px;
   text-align: center;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 30px;
   background-color: #ECECEC;
 
   img{
@@ -73,10 +73,17 @@ export const Container = styled.div`
   .title-sigmabank {
     margin-bottom: 10px;
   }
+
+  @media (max-width: 1280px) {
+    margin-bottom: 50px;
+    min-height: 520px;
+
+  }
   
   @media (max-width: 768px) {
-    width: 100%;
-    padding: 0 20px;
+    margin-bottom: 50px;
+    min-height: 540px;
+    width: 350px;
   }
 `;
 
@@ -84,7 +91,7 @@ export const ContainerDados = styled.div`
   width: 400px;
   height: 200px;
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   .date {
     margin-bottom: 100px;
@@ -96,12 +103,13 @@ export const ContainerDados = styled.div`
 `;
 
 export const Button = styled.button`
-  width: 200px;
+  width: 100%;
   height: 40px;
+  margin-top: 10px;
+
   text-align: center;
   align-items: center;
   justify-content: center;
-  margin: auto;
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -110,7 +118,7 @@ export const Button = styled.button`
 
   @media (max-width: 768px) {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 20px;
   }
 `;
 
