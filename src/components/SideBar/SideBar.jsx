@@ -17,7 +17,6 @@ export default function SideBar({ active }) {
        <ContainerContent>       
         <Content >
             <SideBarItem  Icon={FaHome}  Text="Home" to="/" />
-            <SideBarItem Icon={AiFillCreditCard} Text="Crie seu Cartão" to="/criar"/>
             <SideBarItem Icon={AiFillCreditCard} Text="Meus Cartões" to="/meus-cartoes"/>
             <SideBarItem Icon={MdPix} Text="Faça seu Pix" to="/pagamentos" />
         </Content>
