@@ -18,6 +18,21 @@ export const Cards = styled.div`
     left: 15px;
     margin: auto;
   }
+
+  @media (max-width: 1260px) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      margin: auto;
+    }
+
+    @media (max-width: 926px) {
+      width: 300px;
+      height: 200px;
+    }
+
+
 `;
 
 export const Container = styled.div`
@@ -43,19 +58,9 @@ export const ContainerCard = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 20px;
-
-
 `;
 
 export const ContainerCardSelect = styled.div`
-
-
-@media (max-width: 768px) {
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
-  }
-
 .custom-title{
   width: 80%;
   margin-left: 60px;
@@ -80,12 +85,75 @@ label{
     border: 1px solid #ccc;
     font-size: 14px;
     outline: none;
-    background-color: #D9D9D9;
+    background-color: #E9E9E9;
   }
 
   option{
     display: flex;
     height: 80px;
+
+  }
+
+  @media ( max-width: 1280px ){
+
+    .title-color{
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+    }
+
+    select{
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      width: 80%;
+  }
+  }
+
+  @media ( max-width: 926px ){
+  
+    select{
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      width: 74%;
+  }
+    .custom-title{
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      font-size: 16px;
+      
+    }
+  }
+
+  @media (max-width: 1260px) {
+    .custom-title{
+          width: 400px;
+          display: flex;
+          text-align: center;
+          align-items: center;
+          justify-content: center;
+          margin: auto;
+        }
+    }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+
+    .custom-title{
+      font-size: 14px;
+      width: 300px;
+        }
 
   }
 `
@@ -136,76 +204,81 @@ export const ContainerForm = styled.div`
   `;
 
 export const Paper = styled.div`
-    display: flex;
-    margin-top: 40px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    height: 450px;
-    background-color: #ECECEC;
+  display: flex;
+  margin-top: 40px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  min-height: 450px;
+  background-color: #D2D2D2;
 
-    .custom{
-    color: #0A9AE9;
-  }
+
+  @media (max-width: 1260px) {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin: 50px auto;
+    }
+
+    @media (max-width: 926px) {
+      width: 380px;
+    }
+    @media (max-width: 926px) {
+      width: 360px;
+    }
 `;
 
 export const Form = styled.form`
   display: flex;
-  text-align: center;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   margin: auto;
-  flex-direction: column;
   width: 700px;
 
-
-  .label-name{
-    display: flex;
-    width: 80%;
-    font-size: 14px;
-    margin-bottom:7px;
-
-  }
-
-  .label{
-    font-size: 14px;
-    display: flex;
-    margin-bottom:3px;
-    margin-top:20px;
-
-  }
   
 
-  input {
+  .label-name,
+  .label {
     display: flex;
-    margin: auto;
-    background-color: #D9D9D9;
     width: 80%;
+    font-size: 14px;
+    margin-bottom: 7px;
+    margin-top: ${({ className }) =>
+      className === 'label' ? '20px' : 'inherit'};
+  }
+
+  input {
+    background-color: #F3F3F3;
+    width: 560px;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
     outline: none;
+    margin: auto;
+    display: flex;
   }
 
-  input:focus{
+  input:focus {
     border: 2px solid #007bff;
   }
 
-  small{
+  small {
     width: 80%;
     padding: 6px;
     text-align: center;
     align-items: center;
     justify-content: center;
-    background-color: #FF3B3F99;
-
+    background-color: #ff3b3f99;
   }
 
-  .container-expity-cvc{
+  .container-expiry-cvc {
     display: flex;
-    text-align: center;
     justify-content: center;
     align-items: center;
+    text-align: center;
   }
 
   button {
@@ -219,13 +292,36 @@ export const Form = styled.form`
     cursor: pointer;
   }
 
-  @media (max-width: 768px) {
-    width: 100%;
-    padding: 0 20px;
+  @media (max-width: 1260px) {
+    flex-direction: column; 
   }
 
+  @media (max-width: 926px) {
+      width: 300px;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+
+    .label-name,
+    .label {
+      width: 300px;
+      padding-left: 3px;
+      font-size: 12px;
+      margin-top: 10px;
+
+    }
+    small{
+      width: 298px;
+    }
+
+    input {
+      
+      width: 300px;
+    }
+
+    button {
+      width: 300px;
+    }
+  }
 
 `;
-
-
-
