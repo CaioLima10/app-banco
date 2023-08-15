@@ -1,15 +1,16 @@
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { styled } from "styled-components";
 
-const mobileBreakpointMax = '868px';
-const mobileBreakpointMin = '370px';
 
+export const Section = styled.section`
+
+  @media (max-width: 1280px){
+    display: flex;
+    flex-direction: column;
+  }
+`
 
 export const UserName = styled.div`
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
   width: 76%;
   background-color: #fff;
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
@@ -18,97 +19,51 @@ export const UserName = styled.div`
     display: flex;
     }
 
-
   p{
     font-size: 32px;
     line-height: 1px;
   }
 
-  @media screen and (max-width: ${mobileBreakpointMax}) and (min-width: ${mobileBreakpointMin}) {
-    width: 100%;
-  }
-
 `
 
 export const Container = styled.div`
-  width: 100%;
-  display: flex;
-  text-align: center;
-  align-items: flex-start;
-  justify-content: center;
-
+    border-radius: 8px;
+    width: 60%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    display: inline-flex; 
   p{
     margin-top: 5px;
     margin-bottom: 5px;
   }
 
-  @media screen and (max-width: ${mobileBreakpointMax}) and (min-width: ${mobileBreakpointMin}) {
-    flex-direction: column;
-    align-items: center;
-  }
+
+  @media (max-width: 1280px){
+    margin-top: 40px;
+    width: 600px;
+    }
+    @media (max-width: 630px){
+    width: 450px;
+    }
+    @media (max-width: 530px){
+    width: 350px;
+    }
   `
 
-export const ContainerHidden = styled.div`
-    width: 100%;
-    text-align: center;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 20px;
-    
-
-    span{
-      height: 100px;
-      border-radius: 5px;
-      background-color: #ECECEC;
-      align-items: flex-start;
-      color: #0375B4;
-      display: flex;
-      flex-direction: column;
-      padding: 24px;
-      padding-left: 35px;
-      width: 100%;
-      font-size: 18px;
-      box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
-  }
-
-  .container-hide{
-    display: flex;
-    position: relative;
-
-  }
-  p{
-    font-size: 20px;
-    color: #3B3B3B;
-  }
-
-  button{
-    display: flex;
-
-    background: none;
-    border: none;
-    font-size: 22px;
-    cursor: pointer;
-    left: 80px;
-    position: absolute;
-  }
-
-  @media screen and (max-width: ${mobileBreakpointMax}) and (min-width: ${mobileBreakpointMin}) {
-    align-items: center;
-  }
-`
 
 export const Form = styled.form`
-  width: 100%;
-  max-width: 500px;
-  margin-top: 20px;
+  width: 500px;
   margin: 20px;
-
   padding-top: 30px;
   padding-bottom: 30px;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  background-color: #D2D2D2;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.10);
 
   small{
     width: 84%;
@@ -118,14 +73,10 @@ export const Form = styled.form`
     justify-content: center;
     margin: auto;
     background-color: #FF3B3F99;
-
   }
 
   gap: 10px;
 
-  .container-input{
-    margin-left: 35px;
-  }
 
   label {
     font-weight: bold;
@@ -133,18 +84,41 @@ export const Form = styled.form`
     padding: 6px;
   }
 
-  input {
-    padding: 12px;
+  p{
+    display: flex;
+    margin: auto;
+    width: 415px;
+    margin-bottom: 5px ;
+    color: #3B3B3B;
+  }
+
+  .input-price {
+    background-color: #F3F3F3;
+    height: 110px;
     border: 1px solid #ccc;
     border-radius: 4px;
     outline: none;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: #0375B4;
+    margin: auto;
+    display: flex;
   }
 
-  input:focus{
+  .input-price::placeholder{
+    color: #0375B4;
+    font-size: 30px;
+    text-align: center;
+    margin: auto;
+
+  }
+
+  .input-price:focus{
     border: 2px solid #007bff;
 
   }
-
 
   .container-value{
     text-align: center;
@@ -167,10 +141,14 @@ export const Form = styled.form`
 
   textarea{
     width: 84%;
-    border: 1px solid #ccc;
     resize: none;
     padding: 12px;
     outline: none;
+    border: none;
+    background-color: #F3F3F3;
+    border: 1px solid #ccc;
+
+
   }
 
   textarea:focus{
@@ -179,10 +157,59 @@ export const Form = styled.form`
   }
 
   .container-input{
-      width: 240px;   
-      display:flex;
+      width: 417px;  
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin: auto;
+    }
+
+
+    .info-select , 
+    .info-select-two,
+    .-optiontitleal{
+      width: 417px;  
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin: auto;
+      font-size: 14px;
+
+  }
+  .info-select-two ,
+  .title-optional{
+    color: #3B3B3B;
   }
 
+  .title-optional{
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  select{
+    display: flex;
+    width: 164px;
+    height: 40px;
+    justify-content: flex-start;
+    background-color: #F3F3F3;
+    border: none;
+
+    
+  }
+  .input-select{
+    display:flex;
+    height: 40px;
+    width: 244px;
+    font-size: 18px;
+    margin-left: 10px;
+    padding-left: 10px;
+    background-color: #F3F3F3;
+    border: none;
+
+  }
+
+  .input-select::placeholder{
+    font-size: 14px;
+  }
   button{
     width: 84%;
     padding: 12px;
@@ -192,30 +219,103 @@ export const Form = styled.form`
     cursor: pointer;
   }
 
-  @media screen and (max-width: ${mobileBreakpointMax}) and (min-width: ${mobileBreakpointMin}) {
-    max-width: 100%;
-    padding: 10px;
+  .icon-fill{
+    display: flex; 
+    padding-right: 5px;
+    font-size: 16px;
   }
+
+  .error-message{
+      width: 84%;
+      padding: 6px;
+      font-size: 14px;
+      background-color: #FF3B3F99;
+      color: #000;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+    }
+
+  @media (max-width: 1280px){
+      width: 500px;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+
+    .input-price{
+      width: 350px;
+      }
+
+
+    p{
+      width: 350px;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+    }
+    .info-select , 
+    .info-select-two,
+    .-optiontitleal{
+      width: 350px;
+    }
+
+    select{
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+    }
+
+    button{
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 560px){
+    width: 350px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    
+      p{
+        width: 260px;
+      }
+      .info-select , .info-select-two{
+        width: 300px;
+      }
+      select{
+        width: 30%;
+      }
+      .input-price{
+        width: 300px;
+      }
+      .container-input{
+        width: 340px;
+      }
+      .input-select{
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        width:65%;
+      }
+    }
 `;
 
 export const ContaineIconArrowDown = styled.div`
     display: flex;
     flex-direction: column;
-    width: 500px;
-    min-height: 438px;
-    margin: 20px;
-    background-color: #FFF;
-    margin-top: 20px;
-    transition: max-height 0.3s ease;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-
-    @media screen and (max-width: ${mobileBreakpointMax}) and (min-width: ${mobileBreakpointMin}) {
-    width: 100%;
-    }
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
 
 `
-
-
 export const ArrowDown = styled(IoIosArrowDown)`
   font-size: 22px;
   color: #FFFFFF;
@@ -226,17 +326,60 @@ export const ArrowUp = styled(IoIosArrowUp)`
   font-size: 22px;
   color: #FFFFFF;
 `
-export const ContainerExtract = styled.div`
-display: flex;
-flex-direction: column;
-background-color: #ECECEC;
-min-height: 275px;
-border-radius: 5px;
-width: 92%;
-margin: auto;
-margin-bottom: 20px;
+export const ContainerValue = styled.div`
+    width: 20%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    display: inline-flex;
 
-  .container-info{
+    @media (max-width: 1280px){
+      width: 500px;
+      text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    }
+    @media (max-width: 630px){
+    width: 450px;
+    }
+
+    @media (max-width: 560px){
+      width: 350px;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+    }
+`
+
+export const ContainerExtract = styled.div`
+  min-height: 80px;
+  max-height: 495px;
+  width: 500px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.10);
+  border-radius: 5px;
+  overflow-x: hidden;
+  background-color: #D2D2D2;
+  scrollbar-width: thin; 
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #22222299;
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 2px;
+  }
+
+
+  .container-info {
     display: flex;
     flex-direction: column;
     width: 460px;
@@ -247,22 +390,19 @@ margin-bottom: 20px;
     position: relative;
   }
 
-  .title-extract{
+  .title-extract {
     display: flex;
     width: 84%;
     padding-top: 30px;
     padding-bottom: 10px;
-
     text-align: center;
     align-items: center;
     justify-content: flex-start;
     margin: auto;
     color: #3B3B3B;
-
-    
   }
 
-  .icon-container{
+  .icon-container {
     position: absolute;
     text-align: center;
     align-items: center;
@@ -275,66 +415,99 @@ margin-bottom: 20px;
     color: #3B3B3B;
   }
 
-  .name{
+  .name {
     display: flex;
     font-weight: 700;
     font-size: 14px;
   }
-  .name-number{
+  .name-number {
     display: flex;
     justify-content: space-between;
   }
-  .number{
+  .number {
     color: #007bff;
   }
 
-  .type-date{
+  .type-date {
     display: flex;
     justify-content: space-between;
     color: #3B3B3B;
     margin-top: 5px;
   }
-  .title-type{
+  .title-type {
     font-size: 14px;
   }
 
-  .date{
+  .date {
     display: flex;
     text-align: center;
     align-items: center;
-    justify-content: flex-end
+    justify-content: flex-end;
   }
-  .dados{
+  .dados {
     margin-top: 6px;
     color: #3B3B3B;
     font-size: 12px;
   }
-  .describe{
+  .describe {
     color: #3B3B3B;
     word-break: break-word;
     margin-bottom: 5px;
   }
 
-      span , small{
-        padding-left: 40px;
-        padding-right: 40px;
-        display: flex;
-        word-break: break-word;
-      }
+  span,
+  small {
+    padding-left: 40px;
+    padding-right: 40px;
+    display: flex;
+    word-break: break-word;
+  }
 
-      .border-info{
-        margin-top: 10px;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        margin: auto;
+  .border-info {
+    margin-top: 10px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 340px;
+    height: 1px;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.6);
+  }
 
-        width: 340px;
-        height: 1px;
-        box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.6);
-      }
+  @media (max-width: 1280px) {
+    width: 500px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  @media (max-width: 630px){
+    width: 450px;
 
-      @media screen and (max-width: ${mobileBreakpointMax}) and (min-width: ${mobileBreakpointMin}) {
-      width: 100%;
-      }
-`
+  }
+  @media (max-width: 560px){
+    width: 350px;
+
+    .container-info {
+      width: 400px;
+    }
+    small, .title-type {
+      font-size: 12px;
+      display: flex;
+    }
+    .name-number{
+      width: 380px;
+      font-size: 12px;
+    }
+
+    .dados {
+      margin-top: 10px;
+    }
+    .describe {
+      margin-top: 2px;
+    }
+
+  }
+`;
