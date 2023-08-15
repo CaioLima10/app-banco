@@ -31,8 +31,6 @@ export const Cards = styled.div`
       width: 300px;
       height: 200px;
     }
-
-
 `;
 
 export const Container = styled.div`
@@ -205,7 +203,7 @@ export const ContainerForm = styled.div`
 
 export const Paper = styled.div`
   display: flex;
-  margin-top: 40px;
+  margin-top: 45px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
