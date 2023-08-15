@@ -4,7 +4,7 @@ import {FaBars} from "react-icons/fa"
 export const Container = styled.header`
     height: 60px;
     display: flex;
-    background-color: #0375B4;
+    background-color: #0A9AE9;
 
 `
 export const Hamburguer = styled(FaBars)`
