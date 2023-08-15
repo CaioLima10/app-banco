@@ -67,7 +67,6 @@ import StyleColorGlobal from '../styleColorGlobal';
       function handleCardPasswordBlur(){
         const cardPasswordValue = passwordInputRef.current.value;
         setIsCardPasswordEmpty(!cardPasswordValue)
-
       }
 
       const addToCardLetter = (name) => {
@@ -95,7 +94,6 @@ import StyleColorGlobal from '../styleColorGlobal';
         setCapitalValidMore(password.length >= 8);
       };
       
-    
   useEffect(() => {
     const number = Math.floor(1000000000000000 + Math.random() * 9000000000000000);
     setRandomNumber(number);
@@ -104,7 +102,6 @@ import StyleColorGlobal from '../styleColorGlobal';
     setCardCvc(numberCvc); 
   }, []);
 
-      
     useEffect(() => {
         const cardsLocalstorage = localStorage.getItem('cards');
         if (cardsLocalstorage) {
@@ -162,7 +159,6 @@ import StyleColorGlobal from '../styleColorGlobal';
         });
       };
 
-
       const handleInputChangeName = (e) => {
         const name = e.target.value.trimStart()
         setCardName(name)
@@ -185,7 +181,7 @@ import StyleColorGlobal from '../styleColorGlobal';
                   <ContainerCard style={{ backgroundColor: backgroundCard}}>
                       <ContextCard>
                         <ModalInformation/>
-                        <img src={Logo} alt="" />
+                        <img src={Logo} alt="LOGO" />
                         <h3>{addToCardLetter(cardName)}</h3>
                       </ContextCard>
                       <Visa/>
@@ -216,7 +212,6 @@ import StyleColorGlobal from '../styleColorGlobal';
                   value={cardName}
                   onChange={handleInputChangeName}
                   />
-
 
                 {isCardNameEmpty && <small>Preencha o nome completo!</small>}
                 {isValidLetterEmpty && <small>Necessário ter 6 ou mais caracteres</small>}
