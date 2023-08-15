@@ -204,7 +204,6 @@ export const Form = styled.form`
     padding-left: 10px;
     background-color: #F3F3F3;
     border: none;
-
   }
 
   .input-select::placeholder{
@@ -270,7 +269,7 @@ export const Form = styled.form`
     }
 
     button{
-      width: 100%;
+      width: 360px;
     }
   }
 
@@ -288,7 +287,7 @@ export const Form = styled.form`
         width: 300px;
       }
       select{
-        width: 30%;
+        width: 35%;
       }
       .input-price{
         width: 300px;
@@ -302,8 +301,11 @@ export const Form = styled.form`
         align-items: center;
         justify-content: center;
         margin: auto;
-        width:65%;
+        width:62%;
       }
+      button{
+      width: 290px;
+    }
     }
 `;
 
