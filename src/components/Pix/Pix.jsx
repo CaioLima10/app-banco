@@ -1,37 +1,39 @@
-import { CgCreditCard } from "react-icons/cg"
 import Header from "../Header/Header";
-import { ContaineIconArrowDown, 
-          Container, 
-          ContainerExtract, 
+import {  Container, 
           Form , 
-          ContainerValue, 
           Section } from "./style";
+
 import { useEffect, useRef, useState } from "react";
 import { useNavigate} from "react-router-dom";
 import StyleColorGlobal from "../styleColorGlobal";
 import { AiFillInfoCircle } from "react-icons/ai";
-import { currentMask } from "./mask";
+import Acconut from "./Acconut/acconut";
+
 
 export default function Pix() {
 
-    const [ usersCpf , setUsersCpf ] = useState("Caio Lima")
-    const [ usersCnpj , setUsersCnpj ] = useState("Ygor Mendes")
-    const [ usersTelephone , setUsersTelephone ] = useState("Gael Edward")
+    const totalValue = JSON.parse(localStorage.getItem('totalValue'))
 
-    const [cpfErrorMessage, setCpfErrorMessage] = useState("");
-    const [cnpjErrorMessage ,  setCnpjErrorMessage ] = useState("")
+    const [ usersCpf , setUsersCpf ] = useState("Caio Lima") 
+    const [ usersCnpj , setUsersCnpj ] = useState("Ygor Mendes") 
+    const [ usersTelephone , setUsersTelephone ] = useState("Gael Edward") 
+
+    const [ cpfErrorMessage, setCpfErrorMessage] = useState("");
+    const [ cnpjErrorMessage ,  setCnpjErrorMessage ] = useState("")
     const [ telephoneErrorMessage , setTelephoneErrorMessage ] = useState("")
 
-    const [inputNumber, setInputNumber] = useState("");
+    const [ inputNumber, setInputNumber] = useState("");
     const [ textereaDescribe, setTextereaDescribe] = useState("");
-    const [createPix, setCreatePix] = useState([]);
-    const [openInputCpf, setOpenInputCpf] = useState(false);
-    const [openInputCnpj, setOpenInputCnpj] = useState(false);
-    const [openInputTelephone, setOpenInputTelephone]   = useState(false);
+    const [ createPix, setCreatePix] = useState([]);
+    const [ openInputCpf, setOpenInputCpf] = useState(false);
+    const [ openInputCnpj, setOpenInputCnpj] = useState(false);
+    const [ openInputTelephone, setOpenInputTelephone]   = useState(false);
     const [ desconto , setDesconto ] = useState(0)
-    const [totalDiscount, setTotalDiscount] = useState(0);
+    const [ totalDiscount, setTotalDiscount] = useState(0);
     const [ isPixPriceEmpty , setIsPixPriceEmpty] = useState("")
-    const [selectedOption, setSelectedOption] = useState(""); 
+    const [ selectedOption, setSelectedOption] = useState(""); 
+
+    console.log(createPix)
 
   const pixPriceRef = useRef()
   const navigate = useNavigate();
@@ -54,11 +56,17 @@ export default function Pix() {
 
     function handleClickPix(event) {
       event.preventDefault();
-     
+
+      if (totalValue < parseFloat(inputNumber)) {
+        alert("Você está sem saldo suficiente para realizar essa transação.");
+        setInputNumber("")
+        return;
+      }
+
       if(!inputNumber 
-        && !usersCpf 
-        && !usersCnpj 
-        && !usersTelephone
+        || !usersCpf 
+        || !usersCnpj 
+        || !usersTelephone
         ){
         return
       }
@@ -85,6 +93,7 @@ export default function Pix() {
           second: '2-digit'
         }),
       };
+
 
       if (openInputCpf && isValidCpf(openInputCpf)) {
         if (openInputCpf === "111.111.111-11") {
@@ -113,16 +122,15 @@ export default function Pix() {
       }
     }
     if(open)
-    setCreatePix((prevState) => { 
+      setCreatePix((prevState) => { 
       const updatePix = [...prevState, newPix];
       setTotalDiscount(totalDiscount + desconto);
       localStorage.setItem('Pix', JSON.stringify(updatePix));
       navigate("/enviado", { state: { ...newPix, selectedOption } }); 
+
       return updatePix;
   });
-  
     }
-  
     function isValidCpf(){
       return true 
     }
@@ -133,14 +141,12 @@ export default function Pix() {
       return true
     }
 
-
     function handleRegexCpf(e) {
         let value = e.currentTarget.value;
         value = value.replace(/\D/g, "").trim();
         value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4");
         e.currentTarget.value = value;
         setOpenInputCpf(value);
-
         return
     }
 
@@ -164,16 +170,7 @@ export default function Pix() {
         setOpenInputTelephone(value);
         return
     }
-
-  
-    const addToCardLetter = (name) => {
-      if (typeof name === 'string') {
-        return name.replace(/[^a-zA-Z ]/g, '');
-      } else {
-        return "";
-      }
-    };
-
+        
         const handleInputChangePrice = (event) => {
           const price = event.target.value.trim()
           event.target.value = price
@@ -185,7 +182,6 @@ export default function Pix() {
           setIsPixPriceEmpty(!pixPriceValue)
         }
 
-
     return (
         <>
           <Header />
@@ -193,13 +189,14 @@ export default function Pix() {
           <Section>
             <Container>
                 <Form>
+                <Acconut/>
                     <div className="container-value">
                       <p>Digite o valor a ser enviado</p>
                         <input
                           className="input-price"
                             value={inputNumber}
                             maxLength={10}
-                            onChange={(e) => handleInputChangePrice(currentMask(e))}
+                            onChange={handleInputChangePrice}
                             onKeyPress={handleNumberKeyPress}
                             placeholder="R$ 0.00"
                             ref={pixPriceRef}
@@ -290,10 +287,8 @@ export default function Pix() {
                       <span className="title-optional">Digite uma descrição</span>
                         <textarea
                             onChange={(e) => setTextereaDescribe(e.target.value)}
-                            name=""
-                            id=""
                             cols="30"
-                            rows="6"
+                            rows= "4"
                             placeholder="Opcional"
                         ></textarea>
                     </div>
@@ -301,48 +296,9 @@ export default function Pix() {
                         <button type="submit" onClick={handleClickPix}>
                             Prosseguir
                         </button>
-                        
                     </div>
                 </Form>
                 </Container>
-
-              <ContainerValue>
-                <ContaineIconArrowDown>
-                    <ContainerExtract>
-                      <p className="title-extract">Extrato</p>
-                        {createPix.map((item, index) => (
-                            <div key={index}>
-                              <div className="container-info" >
-                                <div className="icon-container">
-                                  <CgCreditCard/>
-                                </div>
-                                <div className="name-number">
-                                  <div>
-                                      <small>{item.cpf ? usersCpf : ""}</small>
-                                      <small>{item.cnpj ? usersCnpj : ""}</small>
-                                      <small> {item.telephone ? usersTelephone : ""} </small>
-                                  </div>
-                                  <small className="name">{addToCardLetter(item.name)} </small>
-                                  <span className="number">R$ {item.number}</span>
-                                </div>
-                                <div className="type-date">
-                                    <span className="title-type">tipo de transferencia: PIX </span>
-                                    <small className="date" > {item.date}</small>
-
-                                </div>
-                                {item.cpf && <small className="dados">cpf: {item.cpf}</small>}
-                                {item.cnpj && <small className="dados">cnpj: {item.cnpj}</small>}
-                                {item.telephone && <small className="dados">telefone: {item.telephone}</small>}
-                                {item.email && <small className="dados">email: {item.email}</small>}
-                              </div>
-                              <small className="describe"> Descrição: {item.describe}</small>
-
-                              <div className="border-info"></div>
-                            </div>
-                        ))}
-                    </ContainerExtract>
-                </ContaineIconArrowDown>
-                </ContainerValue>
               </Section> 
         </>
     );
