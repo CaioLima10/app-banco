@@ -23,6 +23,7 @@ import iconDelete from "../../assets/Bin.png"
 import { Link } from "react-router-dom";
 import StyleColorGlobal from "../styleColorGlobal";
 import Dialog from "./Dialog";
+import BackToTopButton from "../../BackToTopButton/index"
 
 export default function MyCards() {
   const storedCards = JSON.parse(localStorage.getItem('cards')) || [];
@@ -39,7 +40,6 @@ export default function MyCards() {
     setDialog({
       message,
       isLoading
-
     })
   }
 
@@ -64,7 +64,6 @@ export default function MyCards() {
     return name.replace(/[^a-zA-Z]+/g, " ");
   };
 
-
   const handleClickBlock = (id) => {
     const updatedCards = [...createCards];
     const updatedCardsWithBlock = updatedCards.map((card) => {
@@ -82,10 +81,8 @@ export default function MyCards() {
 
   const handleDeleteCard = (id) => {
     handleDialog("Deseja mesmo deletar... essa ação não poderá voltar atrás", true)
-
     idCardRef.current = id
-
-      }
+  }
 
     const areUSuruDelete = (choose) => {
         if(choose){
@@ -100,7 +97,6 @@ export default function MyCards() {
           handleDialog("", false)
         }
     }
-
 
   return (
     <>
@@ -126,11 +122,11 @@ export default function MyCards() {
                   </div>
                   <h2  style={{ color: backgroundCard }}>{item.number}</h2>
 
-                    <ContainerCvcExpiry>
-                  <small style={{ color: backgroundCard }}> <p className="create">EMITIDO</p> 
-                  {addSpacesToCardExpiry(item.expiry)}  <small className="validate"><p>VALIDADE</p> 05/27</small>
-                  </small>
-                  <small style={{ color: backgroundCard }}><p>CVV</p>{item.cvc}</small>
+                  <ContainerCvcExpiry>
+                      <small style={{ color: backgroundCard }}> <p className="create">EMITIDO</p> 
+                      {addSpacesToCardExpiry(item.expiry)}  <small className="validate"><p>VALIDADE</p> 05/27</small>
+                      </small>
+                      <small style={{ color: backgroundCard }}><p>CVV</p>{item.cvc}</small>
                   </ContainerCvcExpiry>
                   <TitleVisa>
                   <h4 className="name-title" style={{ color: backgroundCard }}>{addToCardLetter(item.name)}</h4>
@@ -153,6 +149,7 @@ export default function MyCards() {
                   </ButtonDelete>
                 </ContainerFunctions>
 
+
                 <button className="btnBlock"
                   onClick={() => handleClickBlock(item.id)}
                 >{item.isCompleted ? <Lock /> : <OpenLock />}
@@ -166,14 +163,16 @@ export default function MyCards() {
                     <img src={ImgCard} alt="image-plus" />
                     <p>Espaço vazio para cartão</p>
                     <div className="border-color-plus"></div>
-                      <Link to="/" >
+                      <Link to="/criar" >
                         <button className="btn-card-plus"><img className="icon-card" src={IconCardPlus} alt="card-plus" />Criar novo Cartão </button>
                       </Link>
+                      
                   </div>
                 </CreateCards>
         </CardList>
           { dialog.isLoading &&   <Dialog onDialog={areUSuruDelete} message={dialog.message}/>}
       </Container>
+      <BackToTopButton/>
     </>
   );
 }
