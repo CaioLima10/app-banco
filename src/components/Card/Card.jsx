@@ -8,7 +8,7 @@
     import { Check, Container, Times } from "./ValidadePassword/style";
     import Logo from "../../assets/LOGO-GOLD.png"
     import { useNavigate } from 'react-router-dom';
-import StyleColorGlobal from '../styleColorGlobal';
+    import StyleColorGlobal from '../styleColorGlobal';
 
     const CreditCard = () => {
       const storedColor = JSON.parse(localStorage.getItem('backgroundCard'));
@@ -170,7 +170,7 @@ import StyleColorGlobal from '../styleColorGlobal';
       };
 
       return (
-        <>
+        <div>
           <Header/>
           <StyleColorGlobal/>
           <ContainerForm>
@@ -260,7 +260,7 @@ import StyleColorGlobal from '../styleColorGlobal';
               </Form>
             </Paper>
           </ContainerForm>
-        </>
+        </div>
       );
     };
 
