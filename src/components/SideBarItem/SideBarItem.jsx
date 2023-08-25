@@ -1,15 +1,14 @@
-import { Link } from "react-router-dom";
-import { Container } from "./style";
+import { Container, StyledRouterLink } from "./style";
 
 export default function SideBarItem({ Icon , Text , to }) {
   return (
     <>  
-      <Link to={to}>
+      <StyledRouterLink to={to}>
         <Container>
             <Icon/>
             {Text}
         </Container>
-      </Link>
+      </StyledRouterLink>
     </>
   )
 }
