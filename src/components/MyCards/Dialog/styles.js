@@ -36,7 +36,8 @@ export const InfoCircle = styled(AiOutlineInfoCircle)`
 `
 
 export const ContainerDialog = styled.div`
-    background-color: #D2D2D2;
+    background-color: #FFFFFF;
+    padding: 10px;
     width: 400px;
     height: 300px;
     border-radius: 6px;
@@ -74,7 +75,7 @@ export const ContainerDialog = styled.div`
   }
 
   button {
-    width: 200px;
+    width: 100%;
     height: 40px;
     margin: 5px;
     cursor: pointer;
