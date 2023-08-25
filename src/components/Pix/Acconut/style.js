@@ -1,21 +1,23 @@
 import { styled } from "styled-components";
 
-
-
 export const ContainerOpen = styled.div`
-    width: 83.5%;
+    width: 92%;
     display: flex;
     text-align: center;
-    align-items: center ;
-    justify-content: flex-start;
-    margin: 5px auto;
+    justify-content: flex-end;
+    align-items: center;
 
+    #title-balance{
+        display: flex;
+        flex-direction: column;
+        color:#3B3B3B;
+    }
+    
     #number-open{
         display: flex;
-        color: #FFFFFF;
+        flex-direction: column;
+        color: #0375B4;
         font-size: 26px;
-        background-color: #0375B4;
-        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.20);
     }
 
     #number-hide{
@@ -23,7 +25,7 @@ export const ContainerOpen = styled.div`
     }
 
     .btn__open__hide{
-        display: flex;
+
         border-radius: 20px;
         cursor: pointer;
         height: 28px;
@@ -33,7 +35,9 @@ export const ContainerOpen = styled.div`
     }
 
     .number__open__hide{
-        width: 160px;
-        margin-right: 5px;
+        width: 140px;
+        display: flex;
+        flex-direction: column;
+
     }
 `
