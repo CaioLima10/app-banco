@@ -12,16 +12,15 @@ export default function ModalInformation() {
         setIsHiddenModal(false);
       }
     };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
+      document.addEventListener("click", handleClickOutside);
+      return () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
   const handleIsHidden = () => {
     setIsHiddenModal((prevState) => !prevState);
+    window.onsubmit()
   };
 
   return (
