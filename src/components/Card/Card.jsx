@@ -1,25 +1,25 @@
     import { useEffect, useRef, useState } from 'react';
-    import { Cards, ContainerCard, ContextCard, Form, ContainerForm, Paper, Visa, ContainerCardSelect } from './styles';
+    import { Cards, ContainerCard, ContextCard, Form, ContainerForm, Paper, Visa, ContainerCardSelect, Wifi, CardsStyle, IconsCardStyle } from './styles';
     import Header from '../Header/Header';
     import ModalInformation from './Information';
 
     import { AiFillEye } from "react-icons/ai";
     import { GrFormViewHide } from "react-icons/gr";
     import { Check, Container, Times } from "./ValidadePassword/style";
-    import Logo from "../../assets/LOGO-GOLD.png"
     import { useNavigate } from 'react-router-dom';
+    import ImgStyle from "../../assets/Mask.png"
     import StyleColorGlobal from '../styleColorGlobal';
+
 
     const CreditCard = () => {
       const storedColor = JSON.parse(localStorage.getItem('backgroundCard'));
 
       const [cardName, setCardName] = useState("");
       const [createCards , setCreateCards] = useState([]); 
-      const [backgroundCard, setBackgroundCard] = useState(storedColor || "white");
+      const [backgroundCard, setBackgroundCard] = useState(storedColor);
 
       const [cardCvc, setCardCvc] = useState("");
       const [randomNumber, setRandomNumber] = useState("");
-
 
       const [isCardNameEmpty, setIsCardNameEmpty] = useState(false);
       const [isValidLetterEmpty, setIsValidLetterEmprt] = useState(false);
@@ -32,6 +32,14 @@
       const [isCapitalValidMore, setCapitalValidMore] = useState(false);
       const [isPasswordValid, setIsPasswordValid] = useState(false);
       const [cardPassword, setCardPassword] = useState("");
+      const [isVisibleCard , setIsVisibledCard] = useState(false)
+      const [isVisibleCardStyle , setIsVisibledCardStyle] = useState(false)
+
+      const [colorOne, setColorOne] = useState("#000000"); 
+      const [colorTwo, setColorTwo] = useState("#FFFFFF"); 
+      const [ colorIcons , setColorIcons ] = useState("#E9E9E9")
+      const [ subColorCard , setSubColorCard ] = useState("#242424")
+      const [ subColorCardOne , setSubColorCardOne ] = useState("#E9E9E9")
 
       const navigate = useNavigate()
 
@@ -138,23 +146,32 @@
           }),
           cvc: cardCvc,
           color: backgroundCard,
-          password: cardPassword 
+          colorOne: "#000000",
+          colorTwo: "#e3e3e3",
+          subColorCard: "#242424",
+          subColorCardOne: "#E9E9E9",
+          colorIcons: "#E9E9E9",
+          password: cardPassword
+
         };
 
-        const nameExists = createCards.some((card) => card.name.toLowerCase() === cardName.toLowerCase())
+      const nameExists = createCards.some((card) => card.name.toLowerCase() === cardName.toLowerCase())
     
       if (nameExists) {
         alert("Já existe um usuario com esse nome cadastrado!!");
         setCardName('');
         return
       }
-
+      if(!backgroundCard){
+        alert("escolha seu cartão!")
+        setCardName('');
+        return
+      }
         setCreateCards((prevCards) => {
  
           const updatedCards = [...prevCards, newCard];
           localStorage.setItem('cards', JSON.stringify(updatedCards));
           navigate("/meus-cartoes")
-
           return updatedCards;
         });
       };
@@ -169,43 +186,93 @@
         setShow((prevIsHidden) => !prevIsHidden);
       };
 
+      useEffect(() => {
+        if(!backgroundCard){
+          setIsVisibledCard(false)
+          setIsVisibledCardStyle(true)
+        }else{
+        setIsVisibledCard(true)
+        setIsVisibledCardStyle(false)
+      }
+      },[backgroundCard])
+
       return (
         <div>
           <Header/>
-          <StyleColorGlobal/>
           <ContainerForm>
             <Paper> 
               <ContainerCardSelect>
                 <h3 className='custom-title'>Crie agora seu Cartão SIGMABANK <br /> personalizado do seu jeito!</h3>
+                { isVisibleCardStyle && (
+                  <Cards>
+                    <CardsStyle>
+                      <IconsCardStyle/>  
+                      <span>Crie seu cartão</span>
+                    </CardsStyle>  
+                  </Cards>
+                ) }
+                {isVisibleCard && (
                 <Cards>
                   <ContainerCard style={{ backgroundColor: backgroundCard}}>
                       <ContextCard>
                         <ModalInformation/>
-                        <img src={Logo} alt="LOGO" />
-                        <h3>{addToCardLetter(cardName)}</h3>
+                            <img src={ImgStyle} alt="LOGO" />
+              
+                        <h3 style={{ color: backgroundCard === colorOne ? colorTwo : colorOne, marginLeft: '20px' }}>{addToCardLetter(cardName)}</h3>
                       </ContextCard>
-                      <Visa/>
+                      <Visa style={{ color: backgroundCard === '#000000' ? colorIcons : colorIcons}}/>
+                      <Wifi style={{ color: backgroundCard === '#000000' ?  colorIcons : colorIcons}}/>
+                      <div 
+                        className='border-color' 
+                        style={{ background: backgroundCard === subColorCardOne ? subColorCardOne : subColorCard}}
+                        ></div>
                     </ContainerCard>  
                 </Cards>
+                )}
 
                 <label className='title-color'> Escolha a cor do seu Cartão</label>
-                <select value={backgroundCard} onChange={(e) => setBackgroundCard(e.target.value)}>
-                  <option value="#ffffff">White</option>
-                  <option value="#111111">Black</option>
-                  <option value="#1A2937">Blue Dark</option>
-                  <option value="#76323F">Oxblood</option> 
-                  <option value="#124714">green</option>
-                  <option value="#393EAA">Jemel</option>
-                </select>
+                <select value={backgroundCard} onChange={(e) => {
+                    setBackgroundCard(e.target.value);
+                    if (e.target.value === "#E9E9E9") {
+                      setColorOne("#000000")
+                      setSubColorCardOne("#E9E9E9");
+                      setColorIcons("#000000")
+                    } else if (e.target.value === "#000000") {
+                      setColorOne("#000000");
+                      setSubColorCard("#242424");
+                      setColorIcons("#e9e9e9")
+                    } else if (e.target.value === "#323232") {
+                      setColorOne("#e3e3e3");
+                      setSubColorCard("#242424");
+                      setColorIcons("#e3e3e3")
+                    }else if (e.target.value === "#323B44") {
+                      setColorOne("#e3e3e3");
+                      setSubColorCard("#242424");
+                      setColorIcons("#e3e3e3")
+                    }else if (e.target.value === "#443333") {
+                      setColorOne("#e3e3e3");
+                      setSubColorCard("#242424");
+                      setColorIcons("#e3e3e3")
+                    }
+                  }}>
+                    { backgroundCard ? <option disabled>Opções</option> : <option hidden>Opções</option> }
+                    <option value="#E9E9E9">modern White</option>
+                    <option value="#000000">modern Black</option>
+                    <option value="#323232">modern gray</option>
+                    <option value="#323B44">modern blue</option> 
+                    <option value="#443333">modern crimson</option> 
+
+                  </select>
+
               </ContainerCardSelect>
       
-              <Form onSubmit={handleClickBtn}>
+              <Form onSubmit={handleClickBtn} >
                 <label className='label-name'>Digite seu nome completo</label>
               <input
                   type="text"
                   name="name"
-                  placeholder="Digite seu Nome"
-                  maxLength={26}
+                  placeholder="Ex: Amanda silva"
+                  maxLength={16}
                   onKeyPress={handleNameKeyPress ? handleNameKeyPress : handdleCardLetterNameBlur}
                   ref={cardNameRef ? cardNameRef : cardNameLetterRef}
                   onBlur={handleCardNameBlur}
@@ -217,12 +284,12 @@
                 {isValidLetterEmpty && <small>Necessário ter 6 ou mais caracteres</small>}
 
                 <Container>
-                        <label className='label'>Digite sua senha Digital</label>
+                        <label className='label'>Digite sua senha digital</label>
                       <div>
                         <input
                           className="input-is-hidden"
                           type={show ? "text" : "password"}
-                          placeholder="digite sua senha"
+                          placeholder="Ex: Amanda@123"
                           onChange={handleInputChangePassword}
                           ref={passwordInputRef} 
                           onBlur={handleCardPasswordBlur}
@@ -252,14 +319,13 @@
                       </div>
                 </Container>
                         {isCardPasswordEmpty && <small>Campo de senha obrigatorio</small> }
-
-
-                  <button type="submit" disabled={!isPasswordValid}>
+                        <button type="submit" disabled={!isPasswordValid}>
                     Confirmar
                   </button>
               </Form>
             </Paper>
           </ContainerForm>
+          <StyleColorGlobal/>
         </div>
       );
     };
