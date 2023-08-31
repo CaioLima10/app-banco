@@ -15,7 +15,7 @@ export default function Account() {
         }
     }, []);
 
-    const handleToggleOpen = (event) => {
+    const handleHideOpen = (event) => {
         event.preventDefault();
         setOpen(!open);
         localStorage.setItem('toggle', JSON.stringify(!open));
@@ -34,12 +34,12 @@ export default function Account() {
         <ContainerOpen>
                 <div className="number__open__hide">
             <div id="title-balance">
-                <span>saldo disponivel</span>
+                <span>Saldo disponivel</span>
             </div>
                 <span id="number-open"> R$ {open ? calculateTotalValue() : "******"}</span>
             </div>
 
-            <div className="btn__open__hide" onClick={handleToggleOpen}>
+            <div className="btn__open__hide" onClick={handleHideOpen}>
                 {open ? <BsEye /> : <BsEyeSlash />}
             </div>
 
