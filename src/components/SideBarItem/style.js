@@ -5,7 +5,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     font-size: 18px;
-    color: #000;
+    color: #fff;
     border-radius: 5px;
     padding: 18px;
     left: ${ props => props.sidebar ? '0' : '-100%'};
@@ -15,10 +15,10 @@ export const Container = styled.div`
     width: 328px;
     
     &:hover{
-        background-color: #AED8EF99;
+        background-color: #403820;
     }
     &:active{
-        border-bottom: 1px solid #03756999;
+        border-bottom: 1px solid  #FF9900;;
     }
     
     > svg{
