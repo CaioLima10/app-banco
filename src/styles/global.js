@@ -8,8 +8,18 @@ export const GlobalStyle = createGlobalStyle`
     font-family: sans-serif;
 }
 body{
-    background-color: #F3F3F3;
+    background-color: #161616;
+    overflow-y: scroll; 
 }
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #FF9900;
+  }
+
 
 `
 
