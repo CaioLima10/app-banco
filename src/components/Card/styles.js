@@ -1,22 +1,35 @@
 import styled from 'styled-components';
 import { FcSimCardChip } from 'react-icons/fc';
 import { BiLogoVisa } from 'react-icons/bi';
+import { AiOutlineWifi } from 'react-icons/ai';
+import { GiSwipeCard } from "react-icons/gi"
 
 export const Cards = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
-  justify-content: flex-start;
-  margin: auto;
-  width: 350px;
+  justify-content: center;
+  width: 440px;
   margin-top: 15px;
-  margin-left: 70px;
 
   img{
-    width: 80px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    width: 70%;
     position: absolute;
-    left: 15px;
-    margin: auto;
+  }
+
+  .border-color{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 80px;
+    height: 100%;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
   }
 
   @media (max-width: 1260px) {
@@ -33,42 +46,66 @@ export const Cards = styled.div`
     }
 `;
 
-export const Container = styled.div`
-  width: 100%;
-  max-width: 500px;
+export const CardsStyle = styled.div`
+    width: 100%;
+    height: 200px;
+    max-width: 320px;
+    position: relative; 
+    border-radius: 16px;
+    border: 3px dashed #3D3B37;
+    background-color: #D9D9D999;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    span{
+      font-size: 20px;
+      font-weight: 700;
+      color: #3D3B3799;
+      margin-bottom: 20px;
+    }
+`
+export const IconsCardStyle = styled(GiSwipeCard)`
+    font-size: 80px;
+    color: #3D3B3799;
+
+`
+
+export const Wifi = styled(AiOutlineWifi)`
+  position: absolute;
+  font-size: 26px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 25px;
-
-
-`;
+  right: 28px;
+  top: 10px;
+  transform: rotate(90deg);
+  z-index: 2;
+`
 
 export const ContainerCard = styled.div`
-  position: relative; 
   width: 100%;
-  max-width: 320px;
   height: 200px;
-  border-radius: 8px;
-  padding: 20px;
+  max-width: 320px;
+  position: relative; 
+  border-radius: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.60);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin-bottom: 20px;
 `;
 
 export const ContainerCardSelect = styled.div`
 .custom-title{
-  width: 80%;
-  margin-left: 60px;
+  width: 100%;
   margin-top: 20px;
 }
 
 label{
     text-align: center;
     margin: auto;
-    margin-left: 35px;
     font-size: 14px;
     opacity: 0.8;
     margin-top: 5px;
@@ -77,8 +114,10 @@ label{
 
   select{
     display: flex;
-    width: 76%;
-    margin-left: 70px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 70%;
     padding: 12px;
     border: 1px solid #ccc;
     font-size: 14px;
@@ -86,13 +125,7 @@ label{
     background-color: #E9E9E9;
   }
 
-  option{
-    display: flex;
-    height: 80px;
-
-  }
-
-  @media ( max-width: 1280px ){
+  @media ( max-width: 1080px ){
 
     .title-color{
       display: flex;
@@ -102,15 +135,7 @@ label{
       margin: auto;
     }
 
-    select{
-      display: flex;
-      text-align: center;
-      align-items: center;
-      justify-content: center;
-      margin: auto;
-      width: 80%;
-  }
-  }
+}
 
   @media ( max-width: 926px ){
   
@@ -151,8 +176,7 @@ label{
     .custom-title{
       font-size: 14px;
       width: 300px;
-        }
-
+      }
   }
 `
 
@@ -161,30 +185,30 @@ color: #000000;
 color: -webkit-linear-gradient(to bottom, #434343, #000000);
 color: linear-gradient(to bottom, #434343, #000000);
 
+
   h3 {
     display: flex;
     text-align: center;
     align-items: center;
     justify-content: flex-start;
     margin: auto;
-    margin-top: 60px;
-    font-size: 20px;
+    margin-top: 130px;
+    font-size: 22px;
     color: rgb(157,156,156);
     color: linear-gradient(0deg, rgba(157,156,156,1) 0%, rgba(237,237,237,1) 52%, rgba(157,156,156,1) 100%);
-    font-family: Poppins, sans-serif;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
     
   }
 `;
 
 export const Visa = styled(BiLogoVisa)`
   position: absolute;
-  font-size: 70px;
+  font-size: 50px;
   display: flex;
-  right: 10px;
+  right: 16px;
   bottom: 0px;
-  color: #bdc3c7;  
-  color: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7); 
-  color: linear-gradient(to right, #2c3e50, #bdc3c7); 
+  z-index: 2;
 `;
 
 export const CardChipIcon = styled(FcSimCardChip)`
@@ -197,18 +221,15 @@ export const ContainerForm = styled.div`
   align-items: center;
   justify-content: center;
   margin: auto;
-
-
   `;
 
 export const Paper = styled.div`
   display: flex;
   margin-top: 45px;
-  padding: 20px;
-  border: 1px solid #ccc;
   border-radius: 8px;
   min-height: 450px;
-  background-color: #D2D2D2;
+  background-color: #fff;
+  
 
 
   @media (max-width: 1260px) {
@@ -223,48 +244,54 @@ export const Paper = styled.div`
       width: 380px;
     }
     @media (max-width: 926px) {
-      width: 360px;
+      width: 340px;
     }
 `;
 
 export const Form = styled.form`
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  margin: auto;
-  width: 700px;
+  flex-direction: column;
+  width: 550px;
+  background-color: #272521;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
 
-  
 
   .label-name,
   .label {
     display: flex;
-    width: 80%;
+    width: 81%;
     font-size: 14px;
     margin-bottom: 7px;
-    margin-top: ${({ className }) =>
-      className === 'label' ? '20px' : 'inherit'};
+    margin-top: 15px;
+    color: #fff;
   }
 
   input {
-    background-color: #F3F3F3;
-    width: 560px;
-    padding: 12px;
-    border: 1px solid #ccc;
+    background-color: #3D3B37;
+    color: #FF9900;
+    width: 445px;
+    padding: 14px;
+    font-size: 14px;
     border-radius: 4px;
+    border: none;
     outline: none;
-    margin: auto;
     display: flex;
   }
 
+  input::placeholder{
+    color: #FF9900;
+  }
+
   input:focus {
-    border: 2px solid #007bff;
+    border: 2px solid rgba(255,214,0,1);
   }
 
   small {
-    width: 80%;
+    width: 81%;
+    margin-top: 5px;
     padding: 6px;
     text-align: center;
     align-items: center;
@@ -280,25 +307,29 @@ export const Form = styled.form`
   }
 
   button {
-    width: 80%;
+    width: 50%;
     margin-top: 20px;
-    padding: 12px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+    padding: 10px;
+    background: rgb(255,214,0);
+    background: linear-gradient(90deg, rgba(255,214,0,1) 0%, rgba(255,153,0,1) 100%);
+    border: 2px solid #FFFFFF;
+    color: #111111;
+    font-size: 18px;
+    font-weight: 700;
     border-radius: 4px;
     cursor: pointer;
   }
 
   @media (max-width: 1260px) {
     flex-direction: column; 
+    width: 100%;
   }
 
   @media (max-width: 926px) {
-      width: 300px;
       align-items: center;
       justify-content: center;
       margin: auto;
+      min-height: 370px;
 
     .label-name,
     .label {
