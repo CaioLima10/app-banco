@@ -11,7 +11,6 @@ export const Logo = styled.div`
     width: 100%;
     height: 100px;
     flex-direction: column;
-    background-color: #0A9AE9;
 
         img{
             width: 120px;
@@ -26,7 +25,6 @@ export const Section = styled.section`
     width: 100%;
     min-height: 100vh;
     position: fixed;
-    background-color: #0A9AE9;
     gap: 20px;
 
 
@@ -57,7 +55,7 @@ export const Section = styled.section`
     }
 
     .container-card:hover{
-        border: 1px solid  #222222;
+        border: 2px solid #FF9900;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
     
@@ -69,7 +67,7 @@ export const Section = styled.section`
         width: 300px;
         height: 300px;
         border-radius: 8px;
-        background-color: #FFFFFF;
+        background-color: #3D3B37;
 
     }
     
@@ -78,7 +76,8 @@ export const Section = styled.section`
         min-height: 100%;
         border-radius: 8px;
 
-        background-color: #FFFFFF;
+        background-color: #3D3B37;
+        color: #fff;
 
         border: none;
         cursor: pointer;
@@ -117,11 +116,10 @@ export const StyledLink = styled(Link)`
         text-align: center;
         gap: 10px;
 
-        color: #222222;
         text-decoration: none;
     
 `
 export const StyledIcon = styled.svg`
     font-size: 60px;
-    color: #222222;
+    color: #FF9900;
 `
