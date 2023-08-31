@@ -7,12 +7,15 @@ export const Button = styled.button`
     right: 50px;
     height: 40px;
     width: 40px;
-    border-radius: 5px;
-    background-color: #FFFFFF;
+    border-radius: 8px;
+    background-color: #FF9900;
     border: none;
     cursor: pointer;
 `
 
 export const ArrowUp = styled(BsFillArrowUpSquareFill)`
     font-size: 46px;
+    color: #3D3B37;
+    border-radius: 8px;
+    
 `
