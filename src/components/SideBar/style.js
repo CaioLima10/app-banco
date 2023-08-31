@@ -2,27 +2,27 @@ import { FaTimes } from "react-icons/fa";
 import { styled } from "styled-components";
 
 export const Container = styled.div`
-    background-color: #fff;
+    background-color: #272521;
     position: fixed;
     height: 100%;
     top: 0px;
     left: 0px;
     width: 340px;
-    border-right: 1px solid #fff;
     box-shadow: 0 0 4px 4px rgba(0 ,0 ,0 ,0.25);
     left: ${ props => props.sidebar ? '0' : '-100%'};
     animation: showSideBar .4s;
-    z-index: 2;
+    z-index: 996;
+
+
     
 `
 export const ContainerContent = styled.div`
-    background-color: red;
     z-index: 2;
 
 `
 export const Close = styled(FaTimes)`
     position: fixed;
-    color: #0375B4;
+    color: #FF9900;
     width: 20px;
     height: 30px;
     margin-top: 14px;
