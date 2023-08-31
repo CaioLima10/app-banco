@@ -7,32 +7,37 @@ import {
         ButtonDelete, 
         Lock, 
         OpenLock, 
-        ContainerCvcExpiry, 
         ContainerFunctions, 
         ArrowForward, 
         Cards,
         TitleVisa,
-        CreateCards} from "./styles";
+        CreateCards,
+        ContainerContent,
+        Wifi} from "./styles";
 
 import Header from "../Header/Header";
 import React, { useState, useEffect, useRef } from "react";
-import Logo from "../../assets/LOGO-GOLD.png"
 import ImgCard from "../../assets/Group 22.png"
-import IconCardPlus from "../../assets/Group 35.png"
-import iconDelete from "../../assets/Bin.png"
 import { Link } from "react-router-dom";
 import StyleColorGlobal from "../styleColorGlobal";
 import Dialog from "./Dialog";
 import BackToTopButton from "../../BackToTopButton/index"
+import ImgStyle from "../../assets/Mask.png"
+import ImgStyleCircle from "../../assets/Capa-links.png"
 
 export default function MyCards() {
   const storedCards = JSON.parse(localStorage.getItem('cards')) || [];
   const filteredCards = storedCards.filter((card) => card !== null);
-  const storedColor = JSON.parse(localStorage.getItem('backgroundCard'));
-  
-  const [deleteCard, setDeleteCard] = useState(filteredCards);
-  const [createCards, setCreateCards] = useState(filteredCards);
-  const [backgroundCard, setBackgroundCard] = useState(storedColor || "rgb(157,156,156)");
+
+  const storedBackgroundCard = JSON.parse(localStorage.getItem('backgroundCard'));
+  const backgroundCard = storedBackgroundCard || "#E9E9E9";
+
+  const createCardsWithColors = filteredCards.map((card) => ({
+    ...card,
+  }));
+
+  const [deleteCard, setDeleteCard] = useState(createCardsWithColors);
+  const [createCards, setCreateCards] = useState(createCardsWithColors);
 
 
   const idCardRef = useRef() 
@@ -53,13 +58,6 @@ export default function MyCards() {
   }, [createCards]);
 
 
-  const addSpacesToCardExpiry = (expiry) => {
-    if (typeof expiry === 'string') {
-      return expiry.replace(/(\d{2})(\d{2})/, '$1/$2').trim();
-    }
-    return '';
-  };
-
   const addToCardLetter = (name) => {
     return name.replace(/[^a-zA-Z]+/g, " ");
   };
@@ -75,7 +73,6 @@ export default function MyCards() {
       }
       return card;
     });
-
     setCreateCards(updatedCardsWithBlock);
   };
 
@@ -97,6 +94,38 @@ export default function MyCards() {
           handleDialog("", false)
         }
     }
+    const [cardNameTextColor, setCardNameTextColor] = useState('#FFFFFF'); 
+
+    function getBrightness(hexColor) {
+      const r = parseInt(hexColor.slice(1, 3), 16);
+      const g = parseInt(hexColor.slice(3, 5), 16);
+      const b = parseInt(hexColor.slice(5, 7), 16);
+      return (r * 299 + g * 587 + b * 114) / 1000;
+    }
+
+    const [cardNameBorderColor, setCardNameBorderColor] = useState('#FFFFFF'); 
+
+    function getBrightnessBorder(hexColor) {
+      const r = parseInt(hexColor.slice(1, 3), 16);
+      const g = parseInt(hexColor.slice(3, 5), 16);
+      const b = parseInt(hexColor.slice(5, 7), 16);
+      return (r * 299 + g * 587 + b * 114) / 1000;
+    }
+
+
+    console.log(cardNameTextColor)
+    console.log(cardNameBorderColor)
+    
+    useEffect(() => {
+      const textColor = getBrightness(backgroundCard) < 128 ? '#FFFFFF' : '#000000';
+      setCardNameTextColor(textColor);
+    }, [backgroundCard]);
+
+    useEffect(() => {
+      const subColor = getBrightnessBorder(backgroundCard) < 128 ? '#FFFFFF' : '#242424';
+      setCardNameBorderColor(subColor);
+    }, [backgroundCard]);
+
 
   return (
     <>
@@ -108,30 +137,48 @@ export default function MyCards() {
             <React.Fragment key={index}>
               <CardsContainer>
                 <Cards
-                    onChange={(e) => setBackgroundCard(e.target.value)}
                     style={{ backgroundColor: item.color }}
                 >
+                  { backgroundCard && <img src={ImgStyle} alt="LOGO" /> || <img src={ImgStyleCircle} alt="LOGO" /> }
+                  
                 <DescribeContainer
                   $completed={item.isCompleted ? "checked-block" : "remove-block"}
                   className={item.isCompleted ? "checked-block" : ""}
                   disabled={item.isCompleted}
                 >
-                  <img src={Logo} alt="logo" />
                   <div className="container-option-card" >
                     <small className="option-card">{item.option}</small>
                   </div>
-                  <h2  style={{ color: backgroundCard }}>{item.number}</h2>
+            
+                <div className="container-number">
+                  {
+                    item.colorOne && item.colorTwo ? (
+                      <h2 style={{ color: getBrightness(item.color) < 128 ? item.colorTwo : item.colorOne }}>
+                        {item.number}
+                      </h2>
+                    ) : null
+                  }
+                </div>
 
-                  <ContainerCvcExpiry>
-                      <small style={{ color: backgroundCard }}> <p className="create">EMITIDO</p> 
-                      {addSpacesToCardExpiry(item.expiry)}  <small className="validate"><p>VALIDADE</p> 05/27</small>
-                      </small>
-                      <small style={{ color: backgroundCard }}><p>CVV</p>{item.cvc}</small>
-                  </ContainerCvcExpiry>
-                  <TitleVisa>
-                  <h4 className="name-title" style={{ color: backgroundCard }}>{addToCardLetter(item.name)}</h4>
-                    <Visa />
-                  </TitleVisa>
+                <div className="container-name-expiry">
+                  <h3 className="title-name" style={{ color: getBrightness(item.color) < 128 ? item.colorTwo : item.colorOne }}>
+                        {addToCardLetter(item.name)}
+                  </h3>
+                  <div className="container-expiry">
+                    <p style={{ color: getBrightness(item.color) < 128 ? item.colorTwo : item.colorOne }}>
+                          {item.expiry}
+                    </p>
+                  </div>
+                </div>
+                <div className='sub-color' 
+                    style={{ backgroundColor:getBrightnessBorder(item.color) < 128 ? item.subColorCard : item.subColorCardOne  }}>  
+                </div>
+
+                <TitleVisa>
+                  <Wifi style={{ color: getBrightness(item.color) < 128 ? item.colorTwo : item.colorOne }}/>
+                  <Visa style={{ color: getBrightness(item.color) < 128 ? item.colorTwo : item.colorOne }}/>
+                </TitleVisa>
+
                 </DescribeContainer>
 
                 <ContainerFunctions>
@@ -143,18 +190,18 @@ export default function MyCards() {
                     disabled={item.isCompleted}
                     onClick={() => handleDeleteCard(item.id)}
                   >
-                    <img src={iconDelete} alt="" />
                     <p>Excluir o cartão</p>
                     <ArrowForward />
                   </ButtonDelete>
                 </ContainerFunctions>
 
-
                 <button className="btnBlock"
                   onClick={() => handleClickBlock(item.id)}
                 >{item.isCompleted ? <Lock /> : <OpenLock />}
-                </button>
+                </button  >
                 </Cards>
+                <ContainerContent>
+                </ContainerContent>
               </CardsContainer>
             </React.Fragment>
           ))}
@@ -164,9 +211,8 @@ export default function MyCards() {
                     <p>Espaço vazio para cartão</p>
                     <div className="border-color-plus"></div>
                       <Link to="/criar" >
-                        <button className="btn-card-plus"><img className="icon-card" src={IconCardPlus} alt="card-plus" />Criar novo Cartão </button>
+                        <button className="btn-card-plus">Criar novo Cartão </button>
                       </Link>
-                      
                   </div>
                 </CreateCards>
         </CardList>
