@@ -61,10 +61,9 @@ export const ContainerExtract = styled.div`
   margin-bottom: 40px;
   min-height: 200px;
   width: 800px;
-  border: 1px solid #ccc;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.10);
   border-radius: 5px;
-  background-color: #D2D2D2;
+  background-color: #272521;
 
 
   &::-webkit-scrollbar {
@@ -89,9 +88,8 @@ export const ContainerExtract = styled.div`
     border-radius: 5px;
     margin: auto;
     position: relative;
-    background-color: #fff;
+    background-color: #3D3B37;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ccc;
   }
 
   .title-extract {
@@ -103,7 +101,7 @@ export const ContainerExtract = styled.div`
     align-items: center;
     justify-content: flex-start;
     margin: auto;
-    color: #3B3B3B;
+    color: #fff;
     font-size: 30px;
   }
 
@@ -117,9 +115,9 @@ export const ContainerExtract = styled.div`
     height: 46px;
     top: 8px;
     left: 8px;
-    background-color: #D5D5D5;
+    background-color: #D9D9D9;
     border-radius: 50%;
-    color: #3B3B3B;
+    color: #FF9900;
   }
 
   .name {
@@ -132,14 +130,14 @@ export const ContainerExtract = styled.div`
     justify-content: space-between;
   }
   .number {
-    color: #007bff;
+    color: #FF9900;
     font-size: 20px;
   }
 
   .type-date {
     display: flex;
     justify-content: space-between;
-    color: #3B3B3B;
+    color: #D9D9D9;
     margin-top: 5px;
   }
   .title-type {
@@ -155,11 +153,11 @@ export const ContainerExtract = styled.div`
   }
   .dados {
     margin-top: 6px;
-    color: #3B3B3B;
+    color: #D9D9D9;
     font-size: 16px;
   }
   .describe {
-    color: #3B3B3B;
+    color: #D9D9D9;
     word-break: break-word;
     margin-bottom: 5px;
   }
