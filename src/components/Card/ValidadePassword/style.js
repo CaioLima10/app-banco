@@ -6,16 +6,15 @@ export const Check = styled(FaCheck)`
     opacity: 1;
     font-size: 14px;
     margin-right: 5px;
-    color: green;
-
+    color: #7FFF09;
 `
 
 export const Times = styled(FaTimes)`
     display: flex;
     opacity: 0.5;
-    font-size: 14px;
+    font-size: 16px;
     margin-right: 5px;
-    color: red;
+    color: #F80000;
     `
 
 export const Container = styled.div`
@@ -24,31 +23,31 @@ div{
     display: inline-flex;
 }
 
-
 .btn-is-hidden {
     display: flex;
     margin-top: 1px;
-    height: 40px;
+    height: 45px;
     align-items: center;
     text-align: center;
     justify-content: center;
     width: 10%;
     background-color: #007bff;
-    border: none;
+    border: 2px solid #fff;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 18px;
     color: #fff;
-    border-top-left-radius: 0 ;
-    border-bottom-left-radius: 0 ;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 6px;
 }
 
 .input-password{
-  border-top-right-radius: 0 ;
-  border-bottom-right-radius: 0 ;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .input-is-hidden {
-    width: 520px;
+    width: 410px;
     display: flex;
     border-radius: 4px;
 }
@@ -61,12 +60,14 @@ div{
         margin-top: 10px;
         margin-bottom: 5px;
         padding: 10px 5px;
-        background-color: #AED8EF;
+        background-color: #3D3B37;
+        color: #FF9900;
     }
     p{
         display: flex;
-        font-size: 14px;
+        font-size: 16px;
         margin-top: 4px;
+        color: #FFFFFF;
     }
 
     @media (max-width: 1260px) {
@@ -74,8 +75,6 @@ div{
     }
 
     @media (max-width: 926px) {
-
-      
       .input-is-hidden {
         width: 268px;
       }
