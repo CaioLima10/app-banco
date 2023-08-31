@@ -5,7 +5,7 @@ import { AiFillCreditCard } from 'react-icons/ai'
 import { TbSquareRoundedPlusFilled } from "react-icons/tb"
 import { PiNewspaperClippingBold } from "react-icons/pi"
 import { MdPix } from 'react-icons/md'
-import  Logo  from "../../assets/BANK-logo.png"
+import  Logo  from "../../assets/BANK-removebg-preview 1.png"
 import Account from "../Pix/Acconut/acconut"
 
 export default function SideBar({ active }) {
@@ -13,8 +13,6 @@ export default function SideBar({ active }) {
     const closeSideBar = () => {
         active(false)
     }
-
-    
 
   return (
     <>
