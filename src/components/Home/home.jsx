@@ -1,16 +1,12 @@
 import Header from "../Header/Header"
 import { Logo, Section, StyledIcon, StyledLink } from "./style"
 import { MdOutlineAddCard, MdPix } from "react-icons/md";
-import { BsCreditCard2Back, 
-          BsNewspaper } from "react-icons/bs"
-
+import { BsCreditCard2Back, BsNewspaper } from "react-icons/bs"
 import SigmaBank from "../../assets/BANK-removebg-preview 1.png"          
 import BackToTopButton from "../../BackToTopButton";
-
+import StyleColorGlobal from "../styleColorGlobal/index"
 
 export default function Home() {
-
-
   return (
     <>  
     <Header/>
@@ -51,6 +47,7 @@ export default function Home() {
         </StyledLink>  
       </div>
     </Section>
+      <StyleColorGlobal/>
       <BackToTopButton/>
     </>
   )
