@@ -10,13 +10,13 @@ export const ContainerOpen = styled.div`
     #title-balance{
         display: flex;
         flex-direction: column;
-        color:#3B3B3B;
+        color:#fff;
     }
     
     #number-open{
         display: flex;
         flex-direction: column;
-        color: #0375B4;
+        color: #FF9900;
         font-size: 26px;
     }
 
@@ -25,13 +25,12 @@ export const ContainerOpen = styled.div`
     }
 
     .btn__open__hide{
-
         border-radius: 20px;
         cursor: pointer;
         height: 28px;
         width: 30px;
         font-size: 26px;
-
+        color: #fff;
     }
 
     .number__open__hide{
