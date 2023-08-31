@@ -29,7 +29,6 @@ export const Container = styled.div`
     text-align: center;
     align-items: center;
     justify-content: center;
-    margin: auto;
     display: inline-flex; 
   p{
     margin-top: 5px;
@@ -40,13 +39,12 @@ export const Container = styled.div`
 export const Form = styled.form`
   width: 800px;
   margin: 26px;
-  padding-top: 25px;
+  padding-top: 27px;
   padding-bottom: 25px;
   display: flex;
   flex-direction: column;
-  background-color: #D2D2D2;
+  background-color: #272521;
   border-radius: 6px;
-  border: 1px solid #ccc;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.10);
   margin-top: 40px;
 
@@ -74,33 +72,33 @@ export const Form = styled.form`
     margin: auto;
     width: 84%;
     margin-bottom: 5px ;
-    color: #3B3B3B;
+    color: #FFFFFF;
   }
 
   .input-price {
-    background-color: #F3F3F3;
+    background-color: #3D3B37;
     height: 80px;
-    border: 1px solid #ccc;
     border-radius: 4px;
+    border: none;
     outline: none;
     text-align: center;
     align-items: center;
     justify-content: center;
     font-size: 30px;
-    color: #0375B4;
+    color: #FF9900;
     margin: auto;
     display: flex;
   }
 
   .input-price::placeholder{
-    color: #0375B4;
+    color: #FF9900;
     font-size: 30px;
     text-align: center;
     margin: auto;
   }
 
   .input-price:focus{
-    border: 2px solid #007bff;
+    border: 2px solid #FF9900;
   }
 
   .container-value{
@@ -115,26 +113,9 @@ export const Form = styled.form`
 
   .input-name{
     width: 84%;
-  }
-  
-  .price{
-    font-size: 14px;
+  color: #FFFFFF;
   }
 
-  textarea{
-    width: 84%;
-    resize: none;
-    padding: 12px;
-    outline: none;
-    border: none;
-    background-color: #F3F3F3;
-    border: 1px solid #ccc;
-  }
-
-  textarea:focus{
-    border: 2px solid #007bff;
-
-  }
 
   .container-input{
       width: 84%;  
@@ -145,46 +126,39 @@ export const Form = styled.form`
     }
 
 
-    .info-select , 
-    .info-select-two,
-    .-optiontitleal{
+    .info-select{
       width: 84%;   
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
       margin: auto;
-      font-size: 14px;
-
+      font-size: 16px;
+      color: #FFFFFF;
+      
   }
-  .info-select-two ,
+  .info-select-two , 
   .title-optional{
-    color: #3B3B3B;
+    color: #FFFFFF;
     width: 84%;
-
-  }
-
-  .title-optional{
-    margin-top: 5px;
-    margin-bottom: 5px;
     font-size: 14px;
-
-    width: 84%;   
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     margin: auto;
-
-  }
-  select{
-    display: flex;
-    width: 250px;
-    height: 40px;
-    justify-content: flex-start;
-    background-color: #F3F3F3;
-    border: none;
-
     
   }
+  
+  select{
+    display: flex;
+    width: 270px;
+    height: 40px;
+    color: #FF9900;
+    justify-content: flex-start;
+    background-color: #3D3B37;
+    border: none;
+  }
+
+
   .input-select{
     display:flex;
     height: 40px;
@@ -192,19 +166,46 @@ export const Form = styled.form`
     font-size: 18px;
     margin-left: 10px;
     padding-left: 10px;
-    background-color: #F3F3F3;
+    margin-bottom: 10px;
+    background-color: #3D3B37;
+    color: #FF9900;
     border: none;
   }
 
   .input-select::placeholder{
     font-size: 14px;
+    color: #FF9900;
   }
+
+  textarea{
+    width: 84%;
+    resize: none;
+    padding: 12px;
+    margin-top: 5px;
+    font-size: 16px;
+    color: #FF9900;
+    outline: none;
+    border: none;
+    background-color: #3D3B37;
+  }
+
+  textarea:focus{
+    border: 2px solid #FF9900;
+  }
+
+  textarea::placeholder{
+    color: #FF9900;
+  }
+
   button{
     width: 84%;
     padding: 12px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+    background: rgb(255,214,0);
+    background: linear-gradient(90deg, rgba(255,214,0,1) 0%, rgba(255,153,0,1) 100%);
+    border: 2px solid #FFFFFF;
+    color: #111;
+    font-size: 16px;
+    font-weight: 700;
     cursor: pointer;
   }
 
