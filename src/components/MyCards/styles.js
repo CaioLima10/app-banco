@@ -1,5 +1,6 @@
-import { AiOutlineEye } from "react-icons/ai";
-import { BiHide, BiLogoVisa } from "react-icons/bi";
+import { AiOutlineWifi } from "react-icons/ai";
+import { BiLogoVisa } from "react-icons/bi";
+import { BsFillLockFill, BsFillUnlockFill } from "react-icons/bs";
 import { FcSimCardChip } from "react-icons/fc";
 import { IoIosArrowForward } from "react-icons/io";
 import styled, { css } from "styled-components";
@@ -9,6 +10,17 @@ export const Container = styled.div`
   align-items: center;
   text-align: center;
   justify-content: center;
+
+  .border-color{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 80px;
+    height: 100%;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+  }
 `;
 
 export const CardList = styled.div`
@@ -17,34 +29,99 @@ export const CardList = styled.div`
   justify-content: center;
 `;
 
-
 export const CardsContainer = styled.div`
   position: relative;
   width: 100%;
   max-width: 340px;
-  height: 325px;
+  height: 365px;
+  background-color: #fff;
   margin: 40px 10px;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 10px;
   padding: 20px;
-  background-color: #D2D2D2;
 `;
 
+export const ContainerContent = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 220px;
+  background-color: #272521;
+  border-radius: 8px;
+
+`
+
 export const Cards = styled.div`
-  background-color: ${({ color }) => color};
-  width: 300px;
-  height: 180px;
+  width: 280px;
+  height: 170px;
   margin: 10px;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 16px;
   position: relative;
   text-align: center;
   justify-content: center;
   align-items: center;
   margin: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.60);
+  z-index: 1;
 
+  .container-number{
+    display: flex;
+    align-items: end;
+    text-align: end;
+    margin: auto;
+    width: 100%;
+    height: 100px;
+  }
+
+  .container-name-expiry{
+    display: flex;
+    width: 70%;
+    justify-content: space-evenly;
+    font-size: 12px;
+    margin-top: 20px;
+  }
+
+  .title-name{
+    font-weight: 900;
+  }
+  
+  .container-expiry{
+    width: 20%;
+    height: 15px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h2 , h3{
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+
+  h2{
+    font-size: 20px;
+  }
+  
+  h3{
+    display: flex;
+    font-size: 12px;
+    width: 100%;
+  }
+  
+  .sub-color{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 70px;
+    height: 100%;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+  }
 
   .btnBlock {
     position: absolute;
@@ -52,28 +129,21 @@ export const Cards = styled.div`
     align-items: center;
     justify-content:center;
     margin:auto;
-    top: 14px;
-    right: 12px;
+    top: 8px;
+    left: 10px;
     width: 35px;
     height: 30px;
     background-color: #D9D9D9;
     border: none;
     border-radius: 50%;
   }
-
-  h2 {
+  h2{
     display: flex;
-    margin-top: 15px;
-  
+
   }
 
-  h4 {
-    display: flex;
-    margin: auto;
-    margin-left: 3px;
-    text-align: center;
-    align-items: flex-start;
-    justify-content: flex-start;    
+ h3{
+    display: flex;  
   }
 
   small{
@@ -81,15 +151,29 @@ export const Cards = styled.div`
   }
 
   img{
-    display: flex;
-    width: 80px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    width: 70%;
+    position: absolute;
   }
 `;
 
+export const Wifi = styled(AiOutlineWifi)`
+  display: flex;
+  position: absolute;
+  font-size: 24px;
+  right: 24px;
+  top: 10px;
+  transform: rotate(90deg);
+  z-index: 2;
+`
+
 export const CreateCards = styled.div`
     width: 340px;
-    height: 325px;
-    background-color: #D2D2D2;
+    min-height: 365px;
+    background-color: #272521;
     padding: 10px;
     margin: 40px 10px 0;
     margin-bottom: 40px;
@@ -100,7 +184,7 @@ export const CreateCards = styled.div`
     }
 
     p{
-      color: #3B3B3B;
+      color: #FFFFFF;
     }
 
     .border-color-plus{
@@ -118,12 +202,14 @@ export const CreateCards = styled.div`
       margin-top: 20px;
       height: 40px;
       width: 300px;
-      border: 1px solid #ccc;
+      border: none;
+      color: #FFFFFF;
+      font-size: 16px;
       border-radius: 6px;
       height: 50px;
       padding-left: 10px;
       cursor: pointer;
-      background-color: #ECECEC;
+      background-color: #3D3B37;
     }
 
     button{
@@ -131,37 +217,27 @@ export const CreateCards = styled.div`
     }
 
     button:hover{
-    background-color: #AED8EF99;
-    }
-    
-    .icon-card{
-      position: absolute;
-      left: 10px;
-      bottom: 5px;
-    }
-
+    border: 2px solid #FF9900;
+  }
+  
     @media (max-width: 1080px){
       &{
         margin-bottom: 50px;
-      }
-
+      } 
     }
 `
-export const Lock = styled(BiHide)`
-  font-size: 24px;
+export const Lock = styled(BsFillLockFill)`
+  font-size: 20px;
   border-radius: 50px;
   text-align: center;
   align-items: center;
   justify-content:center;
   margin:auto;
-  color: #000;
-  color: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);
-  color: linear-gradient(to right, #2c3e50, #bdc3c7);
   cursor: pointer;
 `
 
-export const OpenLock = styled(AiOutlineEye)`
-  font-size: 24px;
+export const OpenLock = styled(BsFillUnlockFill)`
+  font-size: 20px;
   border-radius: 50px;
   color: #000;
   cursor: pointer;
@@ -173,22 +249,23 @@ export const ContainerFunctions = styled.div`
   text-align: center;
   align-items:center;
   justify-content: center;
-  margin: auto;
+  margin: 50px auto;
   width: 100%;
   gap: 5px;
 
   .title-digital{
-    font-size: 14px;
-    color: #00000099;
+    font-size: 18px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #fff;
   }
 
   .border-card{
     height: 2px;
     margin-bottom: 10px;
     width: 100%;
-    background-color: #C7C7C7;
+    background-color: #D8D7D6;
   }
-
 `
 
 export const DescribeContainer = styled.div`
@@ -205,30 +282,19 @@ export const ButtonDelete = styled.button`
   display: flex;
   text-align: center;
   align-items: center;
-  background-color: none;
   border: none;
   width: 300px;
-  border: 1px solid #ccc;
   border-radius: 6px;
   height: 50px;
   padding-left: 10px;
   cursor: pointer;
-  background-color: #ECECEC;
+  font-size: 16px;
+  color: #fff;
+  background-color: #3D3B37;
 
   &:hover{
-    background-color: #AED8EF99;
+    border: 2px solid #FF9900;
   }
-
-  &:active{
-    border-radius: 5px;
-    border: 2px solid #0A9AE9;
-  }
-
-  img{
-    width: 20px;
-    margin-right: 5px;
-  }
-
 
 ${props =>
     props.$completed === "checked-block" &&
@@ -236,7 +302,6 @@ ${props =>
       opacity: ${props => (props.disabled ? "0.4" : "1")};
       pointer-events: ${props => (props.disabled ? "none" : "auto")};
     `}
-
 `
 
 export const ArrowForward = styled(IoIosArrowForward)`
@@ -254,25 +319,6 @@ export const CardChipIcon = styled(FcSimCardChip)`
   margin-bottom: 5px;
 `;
 
-export const ContainerCvcExpiry = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 2px;
-  position: relative;
-
-  .create{
-    font-size: 12px;
-  
-  }
-
-  .validate{
-    left: 110px;
-    top: 3px;
-    font-size: 12px;
-    position: absolute;
-
-  }
-`;
 
 export const TitleVisa = styled.div`
 display: flex;
@@ -281,15 +327,16 @@ align-items: center;
 justify-content: flex-end;
 margin: auto;
 width: 100%;
-margin-bottom: 20px;
-margin-top: 15px; 
 `
 
 export const Visa = styled(BiLogoVisa)`
-  font-size: 50px;
-  color: #bdc3c7;
-  color: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);
-  color: linear-gradient(to right, #2c3e50, #bdc3c7);
+  font-size: 40px;
+  position: absolute;
+  display: flex;
+  right: 16px;
+  bottom: 0px;
+  z-index: 2;
+  z-index: 2;
 `;
 
 export const ContainerPix = styled.button`
