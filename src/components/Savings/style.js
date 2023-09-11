@@ -9,7 +9,6 @@ export const Section = styled.section`
       flex-direction: column;
     }
   }
-
 `;
 
 export const ContainerWrapper = styled.div`
