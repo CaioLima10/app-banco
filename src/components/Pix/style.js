@@ -38,7 +38,6 @@ export const Container = styled.div`
 
 export const Form = styled.form`
   width: 800px;
-  margin: 26px;
   padding-top: 27px;
   padding-bottom: 25px;
   display: flex;
@@ -46,7 +45,6 @@ export const Form = styled.form`
   background-color: #272521;
   border-radius: 6px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.10);
-  margin-top: 40px;
 
   small{
     width: 84%;
@@ -227,9 +225,12 @@ export const Form = styled.form`
       margin: auto;
     }
 
-
   @media (max-width: 740px){
     margin-top: 50px;
+
+    &{
+      width: 90%;
+    }
 
   .input-select{
     display: flex;
