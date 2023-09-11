@@ -9,7 +9,6 @@ import StyleColorGlobal from "../styleColorGlobal";
 import { AiFillInfoCircle } from "react-icons/ai";
 import Acconut from "./Acconut/acconut";
 
-
 export default function Pix() {
 
     const totalValue = JSON.parse(localStorage.getItem('totalValue'))
