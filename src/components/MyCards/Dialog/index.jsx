@@ -1,4 +1,4 @@
-import { Container, ContainerDialog } from "./styles";
+import { Container, ContainerDialog } from "./style";
 import { FaRegTimesCircle } from "react-icons/fa";
 import Hiding from "../../../assets/hiding.png";
 import Logo from "../../../assets/BANK-logo.png"
