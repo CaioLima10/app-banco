@@ -55,10 +55,10 @@ div{
     .container-isValid{
         display: flex;
         flex-direction: column;
+        margin: auto;
         border-radius: 4px;
-
-        margin-top: 10px;
-        margin-bottom: 5px;
+        width: 81%;
+        margin-bottom: 10px;
         padding: 10px 5px;
         background-color: #3D3B37;
         color: #FF9900;
@@ -71,7 +71,11 @@ div{
     }
 
     @media (max-width: 1260px) {
-  
+      .container-isValid{
+        width: 445px;
+
+        margin: 5px 5px 0 0 auto;
+      }
     }
 
     @media (max-width: 926px) {
@@ -80,7 +84,8 @@ div{
       }
       .container-isValid{
         width: 300px;
-        margin-left: 4px;
+
+        margin: 5px 5px 0 0 auto;
       }
       p{
         padding-left: 2px;
