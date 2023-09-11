@@ -64,11 +64,10 @@ export const Section = styled.section`
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 300px;
-        height: 300px;
+        width: 250px;
+        height: 250px;
         border-radius: 8px;
         background-color: #3D3B37;
-
     }
     
     .content , .content-extract{

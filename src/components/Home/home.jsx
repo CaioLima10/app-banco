@@ -5,6 +5,7 @@ import { BsCreditCard2Back, BsNewspaper } from "react-icons/bs"
 import SigmaBank from "../../assets/BANK-removebg-preview 1.png"          
 import BackToTopButton from "../../BackToTopButton";
 import StyleColorGlobal from "../styleColorGlobal/index"
+import { TbTargetArrow } from "react-icons/tb";
 
 export default function Home() {
   return (
@@ -43,6 +44,14 @@ export default function Home() {
           <button className="content-extract">
             <StyledIcon  as={BsNewspaper}/>
             <span>Extrato</span>
+          </button>
+        </StyledLink>  
+      </div>
+      <div className="container-card">
+        <StyledLink to={"/poupanca"}>  
+          <button className="content-extract">
+            <StyledIcon  as={TbTargetArrow}/>
+            <span>POUPA HEROI!</span>
           </button>
         </StyledLink>  
       </div>
