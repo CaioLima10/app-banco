@@ -1,5 +1,5 @@
     import { useEffect, useRef, useState } from 'react';
-    import { Cards, ContainerCard, ContextCard, Form, ContainerForm, Paper, Visa, ContainerCardSelect, Wifi, CardsStyle, IconsCardStyle } from './styles';
+    import { Cards, ContainerCard, ContextCard, Form, ContainerForm, Paper, Visa, ContainerCardSelect, Wifi, CardsStyle, IconsCardStyle } from './style';
     import Header from '../Header/Header';
     import ModalInformation from './Information';
 
@@ -26,14 +26,18 @@
       const [ isCardPasswordEmpty , setIsCardPasswordEmpty ] = useState(false)
 
       const [show, setShow] = useState(false);
+      const [ subShow , setSubShow ] = useState(false)
       const [isCapitalValidAz, setCapitalValidAz] = useState(false);
       const [isCapitalValidSpecial, setCapitalValidSpecial] = useState(false);
       const [isCapitalValidChar, setCapitalValidChar] = useState(false);
       const [isCapitalValidMore, setCapitalValidMore] = useState(false);
       const [isPasswordValid, setIsPasswordValid] = useState(false);
       const [cardPassword, setCardPassword] = useState("");
+      const [ subPassword , setSubPassword ] = useState("")
       const [isVisibleCard , setIsVisibledCard] = useState(false)
       const [isVisibleCardStyle , setIsVisibledCardStyle] = useState(false)
+      const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
+
 
       const [colorOne, setColorOne] = useState("#000000"); 
       const [colorTwo, setColorTwo] = useState("#FFFFFF"); 
@@ -84,23 +88,29 @@
           return "";
         }
       };
-
       const handleInputChangePassword = (e) => {
         const password = e.target.value.trim();
         setCardPassword(password);
-
-        e.target.value = password
       
-        setIsPasswordValid( 
-            /[A-Z]/.test(password) &&
-            /\d/.test(password) && /[/[!@#$%^&*]/.test(password) && password.length >= 8
+        setIsPasswordValid(
+          /[A-Z]/.test(password) &&
+          /\d/.test(password) &&
+          /[!@#$%^&*]/.test(password) &&
+          password.length >= 8
         );
-      
+        setIsPasswordConfirmed(password !== "" && password === subPassword);
+
         setCapitalValidAz(/[A-Z]/.test(password));
         setCapitalValidSpecial(/\d/.test(password));
         setCapitalValidChar(/[!@#$%^&*]/.test(password));
         setCapitalValidMore(password.length >= 8);
       };
+
+      const handleSubInputChangePassword = (e) => {
+        const password = e.target.value.trim();
+        setSubPassword(password);
+      }
+
       
   useEffect(() => {
     const number = Math.floor(1000000000000000 + Math.random() * 9000000000000000);
@@ -134,7 +144,15 @@
           } else {
             setIsValidLetterEmprt(false);
           }
-          setCardName(createCards)
+
+          if (!cardPassword || !subPassword || cardPassword !== subPassword) {
+            setIsCardPasswordEmpty(true);
+            setIsPasswordConfirmed(isCardPasswordEmpty)
+            return;
+          } else {
+            setIsCardPasswordEmpty(false);
+          }
+
 
         const newCard = {
           id: Date.now(),
@@ -151,7 +169,8 @@
           subColorCard: "#242424",
           subColorCardOne: "#E9E9E9",
           colorIcons: "#E9E9E9",
-          password: cardPassword
+          password: cardPassword,
+          subPassword: subPassword
 
         };
 
@@ -164,7 +183,6 @@
       }
       if(!backgroundCard){
         alert("escolha seu cartão!")
-        setCardName('');
         return
       }
         setCreateCards((prevCards) => {
@@ -184,6 +202,10 @@
       const showHidePassword = (event) => {
         event.preventDefault();
         setShow((prevIsHidden) => !prevIsHidden);
+      };
+      const showSubHidePassword = (event) => {
+        event.preventDefault();
+        setSubShow((prevIsHidden) => !prevIsHidden);
       };
 
       useEffect(() => {
@@ -284,20 +306,24 @@
                 {isValidLetterEmpty && <small>Necessário ter 6 ou mais caracteres</small>}
 
                 <Container>
-                        <label className='label'>Digite sua senha digital</label>
+                  <div className='container-label'>
+                        <label className='label'>Crie sua senha digital</label>
+                  </div>
                       <div>
+
                         <input
                           className="input-is-hidden"
                           type={show ? "text" : "password"}
-                          placeholder="Ex: Amanda@123"
+                          placeholder="Senha"
                           onChange={handleInputChangePassword}
                           ref={passwordInputRef} 
                           onBlur={handleCardPasswordBlur}
-
                         />
+
                         <button className="btn-is-hidden" onClick={showHidePassword}>
                           {show ? <AiFillEye /> : <GrFormViewHide />}
                         </button>
+
                       </div>
                       <div className="container-isValid">
                         <p className="capital">
@@ -317,9 +343,26 @@
                           <span>8+ caracteres</span>
                         </p>
                       </div>
+
+                      <div>
+                        <input
+                          className="input-is-hidden"
+                          type={subShow ? "text" : "password"}
+                          placeholder="Confirme sua senha"
+                          onChange={handleSubInputChangePassword}
+                        />
+
+                        <button className="btn-is-hidden" onClick={showSubHidePassword}>
+                          {subShow ? <AiFillEye /> : <GrFormViewHide />}
+                        </button>
+
+                      </div>
+
                 </Container>
-                        {isCardPasswordEmpty && <small>Campo de senha obrigatorio</small> }
-                        <button type="submit" disabled={!isPasswordValid}>
+                      {isPasswordConfirmed && isCardPasswordEmpty ?  <small>A senha de confirmação deve ser igual</small> : false
+                      }
+
+                  <button className='btn-confirm' type="submit" disabled={!isPasswordValid}>
                     Confirmar
                   </button>
               </Form>
