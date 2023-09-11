@@ -1,5 +1,6 @@
 import { CgCreditCard } from "react-icons/cg";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { ImFilesEmpty } from "react-icons/im"
 import { styled } from "styled-components";
 
 export const Section = styled.section`
@@ -59,11 +60,21 @@ export const ContainerValue = styled.div`
 export const ContainerExtract = styled.div`
   margin-top: 40px;
   margin-bottom: 40px;
-  min-height: 200px;
+  min-height: 300px;
   width: 800px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.10);
   border-radius: 5px;
   background-color: #272521;
+
+  .container-extract-empty{
+    margin-top: 40px;
+  }
+
+  h3{
+    color: #D9D9D9;
+    font-size: 30px;
+    opacity: 0.2;
+  }
 
 
   &::-webkit-scrollbar {
@@ -117,21 +128,34 @@ export const ContainerExtract = styled.div`
     left: 8px;
     background-color: #D9D9D9;
     border-radius: 50%;
-    color: #FF9900;
+    color: #222222;
   }
 
   .name {
     display: flex;
-    font-weight: 700;
-    font-size: 20px;
+    font-weight: 300;
+    color: #FF9900;
+    font-size: 14px;
+    margin-bottom: 5px;
   }
+
   .name__number {
     display: flex;
     justify-content: space-between;
   }
-  .number {
-    color: #FF9900;
-    font-size: 20px;
+
+  .number{
+    display: flex;
+    color: #fc1313;
+    font-size: 22px;
+    font-weight: 500;
+    background-color: #D9D9D9;
+    border-bottom-left-radius: 16px;
+    justify-content: flex-end;
+    padding-right: 5px;
+   
+    width: 93%;
+
   }
 
   .type-date {
@@ -154,7 +178,7 @@ export const ContainerExtract = styled.div`
   .dados {
     margin-top: 6px;
     color: #D9D9D9;
-    font-size: 16px;
+    font-size: 14px;
   }
   .describe {
     color: #D9D9D9;
@@ -202,10 +226,6 @@ export const ContainerExtract = styled.div`
     small, .title-type {
       font-size: 18px;
     }
-    .number{
-      font-size: 20px;
-      width: 180px;
-    }
     
     .dados {
       margin-top: 10px;
@@ -224,9 +244,6 @@ export const ContainerExtract = styled.div`
     }
     small, .title-type {
       font-size: 16px;
-    }
-    .number{
-      width: 180px;
     }
 
     .dados {
@@ -253,9 +270,6 @@ export const ContainerExtract = styled.div`
       font-size: 12px;
       width: 220px;
     }
-    .number{
-      font-size: 20px;
-    }
 
     .dados {
       margin-top: 10px;
@@ -267,6 +281,13 @@ export const ContainerExtract = styled.div`
     }
   }
 `;
+
+export const FilesEmpty = styled(ImFilesEmpty)`
+  color: #D9D9D9;
+  font-size: 70px;
+  opacity: 0.2;
+
+`
 
 export const CreditCard = styled(CgCreditCard)`
   font-size: 25px;
