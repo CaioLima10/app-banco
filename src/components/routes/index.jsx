@@ -5,6 +5,7 @@ import Pix from "../Pix/Pix";
 import Sent from "../Pix/Sent/index";
 import Home from "../Home/home"
 import Extract from "../Extract/extract";
+import Savings from "../Savings/savings"
 
 export default function RouterApp () {
   return (
@@ -17,7 +18,8 @@ export default function RouterApp () {
             <Route  path="/pagamentos" element={<Pix/>} />
             <Route  path="/enviado" element={<Sent/>} />
             <Route  path="/extrato" element={<Extract/>} />
-            <Route path="*" element={<Home/> } />
+            <Route path="/poupanca" element={<Savings/>}/>
+            <Route path="*" element={<Home/>}/>
         </Routes>
     </BrowserRouter>
     </>
