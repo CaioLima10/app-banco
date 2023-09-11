@@ -47,8 +47,8 @@ export const ContainerTotal = styled.div`
   }
 `
 
-export const ContainerImc = styled.div`
-    width: 210px;
+export const ContainerCdi = styled.div`
+    min-width: 210px;
     height: 130px;
     background-color: #3D3B37;
     display: inline-flex;
@@ -72,7 +72,12 @@ export const ContainerImc = styled.div`
 
     @media screen and (max-width: 580px) {
     & {
-      max-width: 155px;      
+      min-width: 155px;
+    }
+
+    span{
+        color: #FFFFFF;
+        font-size: 20px;
     }
   }
 `
