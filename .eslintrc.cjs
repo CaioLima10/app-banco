@@ -7,6 +7,15 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
   ],
+  "react/prop-types": [
+    "enabled", 
+    { 
+      "ignore": "ignore",
+      "customValidators": "customValidator",
+      "skipUndeclared": "skipUndeclared" 
+    }
+  ],
+  
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
