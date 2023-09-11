@@ -13,12 +13,12 @@ import {
         TitleVisa,
         CreateCards,
         ContainerContent,
-        Wifi} from "./styles";
+        Wifi,
+        StyledLink} from "./style";
 
 import Header from "../Header/Header";
 import React, { useState, useEffect, useRef } from "react";
 import ImgCard from "../../assets/Group 22.png"
-import { Link } from "react-router-dom";
 import StyleColorGlobal from "../styleColorGlobal";
 import Dialog from "./Dialog";
 import BackToTopButton from "../../BackToTopButton/index"
@@ -112,7 +112,6 @@ export default function MyCards() {
       return (r * 299 + g * 587 + b * 114) / 1000;
     }
 
-
     console.log(cardNameTextColor)
     console.log(cardNameBorderColor)
     
@@ -125,7 +124,6 @@ export default function MyCards() {
       const subColor = getBrightnessBorder(backgroundCard) < 128 ? '#FFFFFF' : '#242424';
       setCardNameBorderColor(subColor);
     }, [backgroundCard]);
-
 
   return (
     <>
@@ -184,6 +182,8 @@ export default function MyCards() {
                 <ContainerFunctions>
                   <p className="title-digital">Cartão Digital</p>
                   <div className="border-card"></div>
+
+
                   <ButtonDelete
                     $completed={item.isCompleted ? "checked-block" : "remove-block"}
                     className={item.isCompleted ? "checked-block" : ""}
@@ -198,7 +198,7 @@ export default function MyCards() {
                 <button className="btnBlock"
                   onClick={() => handleClickBlock(item.id)}
                 >{item.isCompleted ? <Lock /> : <OpenLock />}
-                </button  >
+                </button>
                 </Cards>
                 <ContainerContent>
                 </ContainerContent>
@@ -210,9 +210,9 @@ export default function MyCards() {
                     <img src={ImgCard} alt="image-plus" />
                     <p>Espaço vazio para cartão</p>
                     <div className="border-color-plus"></div>
-                      <Link to="/criar" >
+                      <StyledLink to="/criar" >
                         <button className="btn-card-plus">Criar novo Cartão </button>
-                      </Link>
+                      </StyledLink>
                   </div>
                 </CreateCards>
         </CardList>
