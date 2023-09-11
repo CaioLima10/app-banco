@@ -9,8 +9,6 @@ export default function Sent() {
   const location = useLocation();
   const recentTransaction = location.state;
   
-  
-
   return (
     <ContainerSection>
       <Header/>
