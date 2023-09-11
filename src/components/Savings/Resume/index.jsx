@@ -1,4 +1,4 @@
-import { BorderProgressWrapper, ColoredProgressBar, ContainerContent, ContainerCurrency, ContainerImc , ContainerTotal, Progress } from "./style";
+import { BorderProgressWrapper, ColoredProgressBar, ContainerCdi, ContainerContent, ContainerCurrency , ContainerTotal, Progress } from "./style";
 import Box from "../../../assets/Box.png"
 import OpenBox from "../../../assets/openBox.png"
 import { useState } from "react";
@@ -53,7 +53,6 @@ function handleNumberKeyPress(event) {
   } 
 }
 
-
   return (
     <>
     <ContainerContent>
@@ -65,13 +64,13 @@ function handleNumberKeyPress(event) {
           <p>Sua Poupança Atual</p>
         </div>
       </ContainerTotal>
-      <ContainerImc>
+      <ContainerCdi>
       <div className="content-total">
           <span>R$ {cdi}</span>
           <hr />
           <p>Expectativa de doação <br /> por mês</p>
         </div>
-      </ContainerImc>
+      </ContainerCdi>
     </ContainerContent>
       <ContainerCurrency>
         { openModal && (
