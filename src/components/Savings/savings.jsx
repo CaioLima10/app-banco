@@ -16,7 +16,7 @@ export default function Savings() {
   const initialPresentNumber = JSON.parse(localStorage.getItem("presentNumber")) || 0;
   const initialFullTotal = JSON.parse(localStorage.getItem("fullTotal")) || 0;
   const initialProgress = JSON.parse(localStorage.getItem("progress")) || 0;
-  const initialAccountBalance = JSON.parse(localStorage.getItem("accountBalance")) || 50000;
+  const initialAccountBalance = JSON.parse(localStorage.getItem("accountBalance")) || 30000;
 
   const data = localStorage.getItem("transaction");
   const initialTransactionList = JSON.parse(localStorage.getItem("transaction")) || [];
