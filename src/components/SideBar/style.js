@@ -13,8 +13,6 @@ export const Container = styled.div`
     animation: showSideBar .4s;
     z-index: 996;
 
-
-    
 `
 export const ContainerContent = styled.div`
     z-index: 2;
@@ -45,15 +43,17 @@ export const Content = styled.div`
     text-align: center;
     justify-content: center;
     align-items: center;
+    position: relative;
     
 
     img{
         display: flex;
         left: 38%;
         right: 50%;
-        bottom: -100px;
+        bottom: -60px;
         position: absolute;
         width: 80px;
     }
-
 `
+
+
