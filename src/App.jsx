@@ -1,4 +1,4 @@
-import RouterApp from "./components/routes"
+import RouterApp from "./routes/index"
 import { GlobalStyle } from "./styles/global"
 
 function App() {
