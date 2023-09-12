@@ -1,11 +1,11 @@
 import { BrowserRouter , Route , Routes } from "react-router-dom";
-import CreditCard from "../Card/Card";
-import MyCards from "../MyCards/MyCards";
-import Pix from "../Pix/Pix";
-import Sent from "../Pix/Sent/index";
-import Home from "../Home/home"
-import Extract from "../Extract/extract";
-import Savings from "../Savings/savings"
+import CreditCard from "../components/Card/Card";
+import MyCards from "../components/MyCards/MyCards";
+import Pix from "../components/Pix/Pix";
+import Sent from "../components/Pix/Sent/index";
+import Home from "../components/Home/home"
+import Extract from "../components/Extract/extract";
+import Savings from "../components/Savings/savings"
 
 export default function RouterApp () {
   return (
