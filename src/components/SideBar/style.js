@@ -6,7 +6,6 @@ export const Container = styled.div`
     position: fixed;
     height: 100%;
     top: 0px;
-    left: 0px;
     width: 340px;
     box-shadow: 0 0 4px 4px rgba(0 ,0 ,0 ,0.25);
     left: ${ props => props.sidebar ? '0' : '-100%'};

@@ -33,8 +33,7 @@ export default function Account() {
     if (inputValue === 30000) {
       totalValue -= inputValue;
       accountBalance = totalValue;
-      value = accountBalance
-      setValue(value);
+      setValue(accountBalance);
       localStorage.setItem("accountBalance", JSON.stringify(accountBalance));
     }
 
