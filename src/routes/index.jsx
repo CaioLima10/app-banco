@@ -1,4 +1,4 @@
-import { BrowserRouter , Route , Routes } from "react-router-dom";
+import {Route , Routes } from "react-router-dom";
 import CreditCard from "../components/Card/Card";
 import MyCards from "../components/MyCards/MyCards";
 import Pix from "../components/Pix/Pix";
@@ -10,8 +10,7 @@ import Savings from "../components/Savings/savings"
 export default function RouterApp () {
   return (
     <>  
-    <BrowserRouter>
-        <Routes>
+]        <Routes>
             <Route path="/" element={<Home/> } />
             <Route  path="/criar" element={<CreditCard/>} />
             <Route  path="/meus-cartoes" element={<MyCards/>} />
@@ -21,7 +20,6 @@ export default function RouterApp () {
             <Route path="/poupanca" element={<Savings/>}/>
             <Route path="*" element={<Home/>}/>
         </Routes>
-    </BrowserRouter>
     </>
   )
 } 

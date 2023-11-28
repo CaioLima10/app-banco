@@ -16,7 +16,7 @@
 
       const [cardName, setCardName] = useState("");
       const [createCards , setCreateCards] = useState([]); 
-      const [backgroundCard, setBackgroundCard] = useState(storedColor);
+      const [backgroundCard, setBackgroundCard] = useState(storedColor || "");
 
       const [cardCvc, setCardCvc] = useState("");
       const [randomNumber, setRandomNumber] = useState("");
