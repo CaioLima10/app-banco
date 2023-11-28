@@ -5,14 +5,14 @@ import SideBar from '../SideBar/SideBar'
 
 export default function Header() {
 
-    const [ sidebar , setSideBar ] = useState(false)
+  const [sidebarVisible, setSidebarVisible] = useState(false);
 
-    const showSideBar = () => setSideBar(!sidebar)
+    const toggleSidebar = () => setSidebarVisible(!sidebarVisible);
 
   return (
     <Container>
-        <Hamburguer onClick={showSideBar}/>    
-        { sidebar && <SideBar active={setSideBar}/>}
+        <Hamburguer onClick={toggleSidebar}/>    
+        {sidebarVisible && <SideBar visible={sidebarVisible} onClose={() => setSidebarVisible(false)} />}
     </Container>
   )
 }
